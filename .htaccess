@@ -1,0 +1,5 @@
+php_flag display_error on
+ReWriteEngine On
+ReWriteCond %{REQUEST_FILENAME} !-d
+ReWriteCond %{REQUEST_FILENAME} !-f
+ReWriteCond %{REQUEST_FILENAME} !-l
