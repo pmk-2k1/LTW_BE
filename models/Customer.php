@@ -1,4 +1,8 @@
 <?php
+
+class CustomerException extends Exception
+{
+}
 class Customer{
     private $id;
     private $name;
