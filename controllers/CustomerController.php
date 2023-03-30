@@ -28,14 +28,14 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $id =  $curtomerId;
         $fullname = $_POST['fullname'];
         $email = $_POST['email'];
-        $password = $_POST['password'];
+        $password = md5($_POST['password']);
         $address = $_POST['address'];
         $phone_number = $_POST['phone_number'];
         $gender = $_POST['gender'];
         $role = $_POST['role'];
-        $feedbackId = $_GET['feedback_id'];
-        $billId = $_GET['bill_id'];
-        $cartId = $_GET['cart_id'];
+        // $feedbackId = $_GET['feedback_id'];
+        // $billId = $_GET['bill_id'];
+        // $cartId = $_GET['cart_id'];
         if (empty($fullname) || empty($password)) {
             $response = new Response();
             $response->setHttpStatusCode(406);
