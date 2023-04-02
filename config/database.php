@@ -1,23 +1,22 @@
 <?php
-class Database
+class Database extends PDO
 {
     private $host = 'localhost';
     private $user = 'root';
     private $password = '';
-    private $database = 'ltw';
-    public $conn;
+    private $database = 'clothing_store';
 
-    public function getConnection()
+    public function __construct()
     {
-        $this->conn = null;
         try {
             $dsn = "mysql:host=$this->host;dbname=$this->database;charset=UTF8";
-            $this->conn = new PDO($dsn, $this->user, $this->password);
-            $this->conn->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            parent::__construct($dsn, $this->user, '',
+            array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
+            $this->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            $this->setAttribute(PDO::ATTR_EMULATE_PREPARES, false);
         } catch (PDOException $e) {
-            echo "Kết nối thất bại: " . $e->getMessage();
+            echo "Fail connect to db: " . $e->getMessage();
         }
-        return $this->conn;
     }
 }
 

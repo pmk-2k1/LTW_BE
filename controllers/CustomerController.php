@@ -11,7 +11,6 @@ header('Access-Control-Allow-Headers: Content-Type');
 try {
     //* kết nối tới cơ sở dữ liệu
     $database = new Database();
-    $db = $database->getConnection();
 } catch (PDOException $e) {
     //* kết nối thất bại
     $response = new Response();
@@ -62,18 +61,18 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         $response->send();
         exit();
     } catch (CustomerException $e) {
-        $response = new Response();
-        $response->setHttpStatusCode(500);
-        $response->setSuccess(false);
-        $response->addMessage($e->getMessage());
-        $response->send();
+        // $response = new Response();
+        // $response->setHttpStatusCode(500);
+        // $response->setSuccess(false);
+        // $response->addMessage($e->getMessage());
+        // $response->send();
         exit;
     } catch (PDOException $e) {
-        $response = new Response();
-        $response->setHttpStatusCode(500);
-        $response->setSuccess(false);
-        $response->addMessage($e->getMessage());
-        $response->send();
+        // $response = new Response();
+        // $response->setHttpStatusCode(500);
+        // $response->setSuccess(false);
+        // $response->addMessage($e->getMessage());
+        // $response->send();
         exit;
     }
 }
