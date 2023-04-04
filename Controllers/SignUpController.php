@@ -1,5 +1,6 @@
 <?php
 require_once '..\config\database.php';
+include '..\Models\Customer.php';
 
 header('Access-Control-Allow-Origin: *');
 header("Access-Control-Allow-Methods: POST");
@@ -15,11 +16,11 @@ if($data == null){
     exit;
 }
 
-$email =  $data->email;
-$password = $data->password;
+$customer = new Customer($data->id, $data->isActive, $data->name, $data->email, $data->password, $data->address, $data->phone_number,$data->gender, $data->role, $data->birthday);
 
 $db = new Database();
-$sql = "SELECT * FROM customer WHERE email = '$email' AND password = '$password'";
+$sql = "INSERT INTO customer(`Id`, `Is_active`, `Name`, `Phone_number`, `Email`, `Password`, `Gender`, `Role`, `Address`, `Birthday`)
+VALUES ('$customer.getID()','[value-2]','[value-3]','[value-4]','[value-5]','[value-6]','[value-7]','[value-8]','[value-9]','[value-10]')";
 $database = $db->query($sql);
 
 // $success = count($database->fetchall(PDO::FETCH_ASSOC));

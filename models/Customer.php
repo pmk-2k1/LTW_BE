@@ -5,19 +5,19 @@ class CustomerException extends Exception
 }
 class Customer{
     private $id;
+    private $isActive;
     private $name;
+    private $phone_number;
     private $email;
     private $password;
     private $address;
-    private $phone_number;
     private $gender;
     private $role;
-    private $feedback_id;
-    private $bill_id;
-    private $cart_id;
+    private $birthday;
 
-    public function __construct($id, $name, $email, $password, $address, $phone_number,$gender, $role, $feedback_id, $bill_id, $cart_id){
+    public function __construct($id, $isActive, $name, $email, $password, $address, $phone_number,$gender, $role, $birthday){
         $this->id=$id;
+        $this->isActive=$isActive;
         $this->name=$name;
         $this->email=$email;
         $this->password=$password;
@@ -25,9 +25,7 @@ class Customer{
         $this->phone_number=$phone_number;
         $this->gender=$gender;
         $this->role=$role;
-        $this->feedback_id=$feedback_id;
-        $this->bill_id=$bill_id;
-        $this->cart_id=$cart_id;
+        $this->birthday=$birthday;
     }
 
     public function getID(){
@@ -54,30 +52,19 @@ class Customer{
     public function getRole(){
         return $this->role;
     }
-    public function getFeedbackID(){
-        return $this->feedback_id;
-    }
-    public function getBillID(){
-        return $this->bill_id;
-    }
-    public function getCartID(){
-        return $this->cart_id;
-    }
 
-    public function returnCustomerArray(){
-        $customer = array();
-        $customer['id'] = $this->id;
-        $customer['name'] = $this->name;
-        $customer['email'] = $this->email;
-        $customer['password'] = $this->password;
-        $customer['address'] = $this->address;
-        $customer['phone_number'] = $this->phone_number;
-        $customer['gender'] = $this->gender;
-        $customer['role'] = $this->role;
-        $customer['feedback_id'] = $this->feedback_id;
-        $customer['bill_id'] = $this->bill_id;
-        $customer['cart_id'] = $this->cart_id;
-        return $customer;
-    }
+    // public function returnCustomerArray(){
+    //     $customer = array();
+    //     $customer['id'] = $this->id;
+    //     $customer['name'] = $this->name;
+    //     $customer['email'] = $this->email;
+    //     $customer['password'] = $this->password;
+    //     $customer['address'] = $this->address;
+    //     $customer['phone_number'] = $this->phone_number;
+    //     $customer['gender'] = $this->gender;
+    //     $customer['role'] = $this->role;
+    //     $customer['feedback_id'] = $this->feedback_id;
+    //     return $customer;
+    // }
 }
 ?>
