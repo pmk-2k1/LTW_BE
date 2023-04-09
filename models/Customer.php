@@ -16,7 +16,6 @@ class Customer{
     private $birthday;
 
     public function __construct( $isActive, $name, $phone_number, $email, $password,$gender, $role, $address, $birthday){
-        // $this->id=$id;
         $this->isActive=$isActive;
         $this->name=$name;
         $this->phone_number=$phone_number;

@@ -23,5 +23,5 @@ $database = $db->query($sql);
 
 // $success = count($database->fetchall(PDO::FETCH_ASSOC));
 // echo $success? '{"IsLogin":"true"}': '{"IsLogin":"false"}';
-echo json_encode($database->fetchall(PDO::FETCH_ASSOC));
+echo json_encode($database->fetch(PDO::FETCH_ASSOC));
 ?>
