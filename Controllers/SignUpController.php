@@ -52,16 +52,4 @@ try {
 } catch (Exception $e) {
     echo 'Error with: ' .$e->getMessage();
 }
-
-// $success = count($customerCheck->fetchall(PDO::FETCH_ASSOC));
-// if($success==0){
-//     if($signUpCusstomer->execute()){
-//         echo json_encode($signUpCusstomer->fetchall(PDO::FETCH_ASSOC));
-//         echo "New record created successfully!!!!";
-//     } else {
-//         echo "Unable to create record";
-//     }
-// }else {
-//     exit;
-// }
 ?>
