@@ -1,6 +1,6 @@
 <?php
 require_once '..\config\database.php';
-require_once '..\models\Customer.php';
+require_once '..\models\Product.php';
 
 header('Access-Control-Allow-Origin: *');
 header("Access-Control-Allow-Methods: POST");
@@ -12,10 +12,10 @@ if($data == null){
     echo "{'Error':'Can not get data from UI'}";
     exit;
 }
-$customer = new Customer( $data->isActive, $data->name, $data->phone_number, $data->email, md5($data->password), $data->gender, $data->role, $data->address, $data->birthday);
-$customerData =$customer->returnCustomerArray();
-$db = new Database();
 
+$product = new Product($data->productIsActive, $data->productName, $data->productType, $data->productPrice, $data->productQuantity, $data->productDescription);
+$productData = $product->returnProductArray();
+$db = new Database();
 function getGUID(){
     if (function_exists('com_create_guid')){
         return trim(com_create_guid(), '{}');
@@ -32,24 +32,26 @@ function getGUID(){
     }
 }
 
+
 while (true)
 {
     $GUID = getGUID();
-    $query = "SELECT * FROM customer WHERE Id = '$GUID'";
-    $customerCheck = $db->query($query);
-    if ($customerCheck != false)
+    $query = "SELECT * FROM product WHERE Id = '$GUID'";
+    $productCheck = $db->query($query);
+    if ($productCheck != false)
         break;
 }
 
-$customerData['id'] = $GUID;
+$productData['productId'] = $GUID;
 
 try {
-    $db->query("INSERT INTO customer(Id, Is_active, Name, Phone_number, Email, Password, Gender, Role, Address, Birthday)
-    VALUES ('".$customerData['id']."','".$customerData['is_active']."','".$customerData['name']."','".$customerData['phone_number']."','".$customerData['email']."',
-            '".$customerData['password']."','".$customerData['gender']."','".$customerData['role']."','".$customerData['address']."','".$customerData['birthday']."')");
+    $db->query("INSERT INTO product(Id, Is_active, Name, Type, Price, Quantity, Description)
+    VALUES ('".$productData['productId']."','".$productData['productIsActive']."','".$productData['productName']."','".$productData['productType']."','".$productData['productPrice']."',
+            '".$productData['productQuantity']."','".$productData['productDescription']."')");
 
-    echo json_encode($customerData);
+    echo json_encode($productData);
 } catch (Exception $e) {
     echo 'Error with: ' .$e->getMessage();
 }
+
 ?>
