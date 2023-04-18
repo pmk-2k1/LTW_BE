@@ -1,6 +1,5 @@
 <?php
 require_once '..\config\database.php';
-require_once '..\models\Customer.php';
 
 header('Access-Control-Allow-Origin: *');
 header("Access-Control-Allow-Methods: DELETE");
@@ -50,5 +49,3 @@ if($deleteUser==false){
 // }catch (Exception $e) {
 //     echo 'Error with: ' .$e->getMessage();
 // }
-
-// echo json_encode($database->fetch(PDO::FETCH_ASSOC));
