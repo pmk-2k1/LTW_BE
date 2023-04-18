@@ -24,10 +24,12 @@ if($data_id == false) {
     exit;
 }
 try {
-    $sql = "UPDATE customer SET Is_active = '$data->isActive', Name = '$data->name', Phone_numbner = '$data->phoneNumber', Email = '$data->email', Gender = '$data->gender',
-        Role = '$data->role', Address = '$data->address', Birthday = '$data->birthday'";
+    $sql = "UPDATE customer SET Is_active = '$data->isActive', Name = '$data->name', Phone_number = '$data->phoneNumber', Email = '$data->email', Gender = '$data->gender',
+        Role = '$data->role', Address = '$data->address', Birthday = '$data->birthday'
+        WHERE Id = '$data->id'";
 
     $db->query($sql);
+    echo '{"isSuccess": "true", "error": "null"}';
 } catch (Exception $e) {
     echo '{"isSuccess": "false", "error": "Can not find user with id: "' .$e->getMessage(). '}';
 }
