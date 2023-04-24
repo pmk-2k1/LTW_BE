@@ -10,7 +10,7 @@ header("Content-type:application/json");
 $data = json_decode(file_get_contents("php://input"));
 
 if($data == null){
-    echo '{"isSuccess": "true", "message": "Can not get data from UI"}';
+    echo '{"isSuccess": false, "message": "Can not get data from UI"}';
     exit;
 }
 
@@ -30,6 +30,6 @@ try {
         echo '{"isSuccess": false, "message": "Số điện thoại hoặc mật khẩu không hợp lệ"}';
     }
 } catch (Exception $e) {
-    echo '{"isSuccess": "false", "message": "Can not find user with id: ' .$e->getMessage(). '"}';
+    echo '{"isSuccess": false, "message": "Error SQL: ' .$e->getMessage(). '"}';
 }
 ?>
