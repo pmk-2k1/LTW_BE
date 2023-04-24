@@ -30,6 +30,6 @@ try {
         echo '{"isSuccess": false, "message": "Số điện thoại hoặc mật khẩu không hợp lệ"}';
     }
 } catch (Exception $e) {
-    echo '{"isSuccess": false, "message": "Can not find user with id: ' .$e->getMessage(). '"}';
+    echo '{"isSuccess": false, "message": "Error SQL: ' .$e->getMessage(). '"}';
 }
 ?>

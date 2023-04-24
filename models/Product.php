@@ -1,5 +1,6 @@
 <?php
-class Product{
+class Product
+{
     private $productId;
     private $productIsActive;
     private $productName;
@@ -9,7 +10,9 @@ class Product{
     private $productDescription;
 
 
-    public function __construct( $productIsActive,$productName,$productType, $productPrice, $productQuantity, $productDescription){
+    public function __construct($productId, $productIsActive, $productName, $productType, $productPrice, $productQuantity, $productDescription)
+    {
+        $this->productId = $productId;
         $this->productIsActive = $productIsActive;
         $this->productName = $productName;
         $this->productType = $productType;
@@ -18,29 +21,37 @@ class Product{
         $this->productDescription = $productDescription;
 
     }
-    public function getProductID(){
+    public function getProductID()
+    {
         return $this->productId;
     }
-    public function getProductIsActive(){
+    public function getProductIsActive()
+    {
         return $this->productIsActive;
     }
-    public function getProductName(){
+    public function getProductName()
+    {
         return $this->productName;
     }
-    public function getProductType(){
+    public function getProductType()
+    {
         return $this->productType;
     }
-    public function getProductPrice(){
+    public function getProductPrice()
+    {
         return $this->productPrice;
     }
-    public function getProductQuantity(){
+    public function getProductQuantity()
+    {
         return $this->productQuantity;
     }
-    public function getProductDescription(){
+    public function getProductDescription()
+    {
         return $this->productDescription;
     }
 
-    public function returnProductArray(){
+    public function returnProductArray()
+    {
         $product = array();
         $product['productId'] = $this->productId;
         $product['productIsActive'] = $this->productIsActive;

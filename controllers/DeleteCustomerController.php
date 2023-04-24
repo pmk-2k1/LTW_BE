@@ -32,6 +32,6 @@ try {
     }
 
 } catch (Exception $e) {
-    echo '{"isSuccess": false , "message": "Error with:  ' . $e->getMessage() . '"}';
+    echo '{"isSuccess": false , "message": "Error SQL: ' . $e->getMessage() . '"}';
 }
 ?>

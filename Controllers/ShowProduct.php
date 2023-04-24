@@ -2,21 +2,30 @@
 require_once '..\config\database.php';
 
 header('Access-Control-Allow-Origin: *');
-header('Access-Control-Allow-Methods: Content-Type');
+header("Access-Control-Allow-Methods: GET");
+header("Access-Control-Allow-Headers: Content-Disposition, Content-Type, Content-Length, Accept-Encoding");
+header("Content-type:application/json");
 
-class ProductAPI {
-    function Show() {
-        $db = new Database();
-        $sql = "SELECT * FROM product";
-        $data = $db->query($sql);
-        // var_dump($data->fetchall(PDO::FETCH_ASSOC));
-        return json_encode($data->fetchall(PDO::FETCH_ASSOC));
-    }
+
+$data = json_decode(file_get_contents("php://input"));
+
+$db = new Database();
+
+$sql = "SELECT * FROM product";
+if ($data != null) {
+    $sql .= " WHERE Type = " . $data->type;
 }
-$product = new ProductAPI();
-header('Content-Type: application/json');
-$temp = $product->Show();
 
-// var_dump(json_decode($temp));
-echo $temp;
+try {
+    $database = $db->query($sql);
+    $product = $database->fetchAll(PDO::FETCH_ASSOC);
+
+    if ($product == true) {
+        echo '{"isSuccess": true, "message": "Thành công", "data": ' . json_encode($product) . '}';
+    } else {
+        echo '{"isSuccess": false, "message": "Hết hàng"}';
+    }
+} catch (Exception $e) {
+    echo '{"isSuccess": false, "message": "Error SQL: ' . $e->getMessage() . '"}';
+}
 ?>

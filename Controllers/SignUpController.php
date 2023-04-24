@@ -36,5 +36,5 @@ try {
     VALUES ('" . $customerData['id'] . "','" .$customerData['name']. "','" .$customerData['phoneNumber']. "','" .$customerData['password']. "','" .$customerData['address']."')");
     echo '{"isSuccess": true, "message": "Đăng kí thành công"}';
 } catch (Exception $e) {
-    echo '{"isSuccess": false , "message": "Error with:  '.$e->getMessage().'"}';
+    echo '{"isSuccess": false , "message": "Error SQL: '.$e->getMessage().'"}';
 }
