@@ -18,10 +18,11 @@ $db = new Database();
 if($data->phone_number[0]!='0'){
     $data->phone_number = "0" + $data->phone_number;
 }
+
 $query = "SELECT * FROM customer WHERE Phone_number = '$data->phone_number'";
 $customerCheck = $db->query($query);
 if (count($customerCheck->fetchAll(PDO::FETCH_ASSOC)) > 0) {
-    echo '{"isSuccess": false,"message": "Số điện thoại đã đăng kí"}';
+    echo '{"isSuccess": false, "message": "Số điện thoại đã đăng kí"}';
     exit;
 }
 $customerData['id'] = uniqid($data->phone_number);
@@ -31,5 +32,5 @@ try {
     VALUES ('" . $customerData['id'] . "','" .$customerData['name']. "','" .$customerData['phone_number']. "','" .$customerData['password']. "','" .$customerData['address']."')");
     echo '{"isSuccess": true,"message": "Đăng kí thành công"}';
 } catch (Exception $e) {
-    echo '{"isSuccess": false , "Error with:  '.$e->getMessage().'"}';
+    echo '{"isSuccess": false , "message": "Error with:  '.$e->getMessage().'"}';
 }
