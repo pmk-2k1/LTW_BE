@@ -1,7 +1,7 @@
 <?php
 
 require_once '..\config\database.php';
-require_once '..\models\Customer.php';
+// require_once '..\models\Voucher.php';
 
 header('Access-Control-Allow-Origin: *');
 header("Access-Control-Allow-Methods: PUT");
@@ -17,16 +17,15 @@ if($data == null){
 
 $db = new Database();
 
-$select_id = $db->query("SELECT * FROM customer WHERE id = '$data->id'");
-$data_id = $select_id->fetch(PDO::FETCH_ASSOC);
+$check_id = $db->query("SELECT * FROM voucher WHERE Id = '$data->voucherId'");
+$data_id = $check_id->fetch(PDO::FETCH_ASSOC);
 if($data_id == false) {
-    echo '{"isSuccess": "false", "error": "Can not find user with id: "' .$data->id. '}';
+    echo '{"isSuccess": "false", "error": "Can not find user with id: "' .$data->Id. '}';
     exit;
 }
 try {
-    $sql = "UPDATE customer SET Is_active = '$data->isActive', Name = '$data->name', Phone_number = '$data->phoneNumber', Email = '$data->email', Gender = '$data->gender',
-        Role = '$data->role', Address = '$data->address', Birthday = '$data->birthday'
-        WHERE Id = '$data->id'";
+    $sql = "UPDATE voucher SET Is_active = '$data->voucherIsActive', Percent = '$data->voucherPercent', Start_date = '$data->voucherStartDate', End_date = '$data->voucherEndDate'
+        WHERE Id = '$data->voucherId'";
 
     $db->query($sql);
     echo '{"isSuccess": "true", "error": "null"}';
