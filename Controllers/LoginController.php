@@ -10,15 +10,15 @@ header("Content-type:application/json");
 $data = json_decode(file_get_contents("php://input"));
 
 if($data == null){
-    echo "{'Error':'Can not get data from UI'}";
+    echo '{"isSuccess": "true", "message": "Can not get data from UI"}';
     exit;
 }
 
-$phone_number =  $data->phone_number;
+$phoneNumber =  $data->phoneNumber;
 $password = md5($data->password);
 
 $db = new Database();
-$sql = "SELECT * FROM customer WHERE Phone_number = '$phone_number' AND password = '$password'";
+$sql = "SELECT * FROM customer WHERE Phone_number = '$phoneNumber' AND password = '$password'";
 try {
     $database = $db->query($sql);
     $loginUser = $database->fetch(PDO::FETCH_ASSOC);
