@@ -1,7 +1,6 @@
 <?php
 
 require_once '..\config\database.php';
-require_once '..\models\Customer.php';
 
 header('Access-Control-Allow-Origin: *');
 header("Access-Control-Allow-Methods: PUT");
@@ -17,16 +16,15 @@ if($data == null){
 
 $db = new Database();
 
-$select_id = $db->query("SELECT * FROM customer WHERE id = '$data->id'");
-$data_id = $select_id->fetch(PDO::FETCH_ASSOC);
+$check_id = $db->query("SELECT * FROM news WHERE Id = '$data->newsId'");
+$data_id = $check_id->fetch(PDO::FETCH_ASSOC);
 if($data_id == false) {
-    echo '{"isSuccess": "false", "error": "Can not find user with id: "' .$data->id. '}';
+    echo '{"isSuccess": "false", "error": "Can not find user with id: "' .$data->Id. '}';
     exit;
 }
 try {
-    $sql = "UPDATE customer SET Is_active = '$data->isActive', Name = '$data->name', Phone_number = '$data->phoneNumber', Email = '$data->email', Gender = '$data->gender',
-        Role = '$data->role', Address = '$data->address', Birthday = '$data->birthday'
-        WHERE Id = '$data->id'";
+    $sql = "UPDATE news SET Status = '$data->newsStatus',  Start_date= '$data->newsStartDate', End_date = '$data->newsEndDate', Content = '$data->newsContent'
+        WHERE Id = '$data->newsId'";
 
     $db->query($sql);
     echo '{"isSuccess": "true", "error": "null"}';

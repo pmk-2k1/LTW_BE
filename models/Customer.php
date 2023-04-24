@@ -15,16 +15,16 @@ class Customer{
     private $address;
     private $birthday;
 
-    public function __construct($isActive, $name, $phone_number, $email, $password,$gender, $role, $address, $birthday){
-        $this->isActive=$isActive;
+    public function __construct( $name, $phone_number, $password, $address){
+        // $this->isActive=$isActive;
         $this->name=$name;
         $this->phone_number=$phone_number;
-        $this->email=$email;
+        // $this->email=$email;
         $this->password=$password;
         $this->address=$address;
-        $this->gender=$gender;
-        $this->role=$role;
-        $this->birthday=$birthday;
+        // $this->gender=$gender;
+        // $this->role=$role;
+        // $this->birthday=$birthday;
     }
 
     public function getID(){
@@ -60,16 +60,16 @@ class Customer{
 
     public function returnCustomerArray(){
         $customer = array();
-        $customer['id'] = $this->id;
-        $customer['is_active'] = $this->isActive;
+        // $customer['id'] = $this->id;
+        // $customer['is_active'] = $this->isActive;
         $customer['name'] = $this->name;
         $customer['phone_number'] = $this->phone_number;
-        $customer['email'] = $this->email;
+        // $customer['email'] = $this->email;
         $customer['password'] = $this->password;
-        $customer['gender'] = $this->gender;
-        $customer['role'] = $this->role;
+        // $customer['gender'] = $this->gender;
+        // $customer['role'] = $this->role;
         $customer['address'] = $this->address;
-        $customer['birthday'] = $this->birthday;
+        // $customer['birthday'] = $this->birthday;
         return $customer;
     }
 }

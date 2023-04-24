@@ -45,7 +45,7 @@ CREATE TABLE `bill` (
 
 CREATE TABLE `bill_detail` (
   `BillID` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `ProductID` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `ProductID` char(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `Count` int(10) UNSIGNED NOT NULL DEFAULT 1,
   `Price_item` decimal(20,5) NOT NULL DEFAULT 0.00000
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -58,7 +58,7 @@ CREATE TABLE `bill_detail` (
 
 CREATE TABLE `cart` (
   `CustomerID` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `ProductID` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `ProductID` char(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `Count` int(10) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -98,7 +98,7 @@ INSERT INTO `customer` (`Id`, `Is_active`, `Name`, `Phone_number`, `Email`, `Pas
 
 CREATE TABLE `feedback` (
   `CustomerID` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `ProductID` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `ProductID` char(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `Content` varchar(5000) DEFAULT NULL,
   `Start_date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -112,7 +112,7 @@ CREATE TABLE `feedback` (
 CREATE TABLE `image` (
   `Id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `Content` mediumblob NOT NULL,
-  `ProductID` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL
+  `ProductID` char(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -136,7 +136,7 @@ CREATE TABLE `news` (
 --
 
 CREATE TABLE `product` (
-  `Id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `Id` char(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `Is_active` tinyint(1) NOT NULL DEFAULT 1,
   `Name` varchar(100) NOT NULL,
   `Type` varchar(10) NOT NULL,
@@ -189,7 +189,7 @@ ALTER TABLE `cart`
 --
 ALTER TABLE `customer`
   ADD PRIMARY KEY (`Id`),
-  ADD UNIQUE KEY `Email` (`Email`),
+  -- ADD UNIQUE KEY `Email` (`Email`),
   ADD UNIQUE KEY `Phone_number` (`Phone_number`);
 
 --

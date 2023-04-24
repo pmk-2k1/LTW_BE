@@ -14,12 +14,19 @@ if($data == null){
     exit;
 }
 
-$email =  $data->email;
+$phone_number =  $data->phone_number;
 $password = md5($data->password);
 
 $db = new Database();
-$sql = "SELECT * FROM customer WHERE email = '$email' AND password = '$password'";
+$sql = "SELECT * FROM customer WHERE Phone_number = '$phone_number' AND password = '$password'";
 $database = $db->query($sql);
 
-echo json_encode($database->fetch(PDO::FETCH_ASSOC));
+$loginUser = $database->fetch(PDO::FETCH_ASSOC);
+
+if($loginUser == true){
+    echo '{"isSuccess": true,"message": "Thành công"}';
+}
+else{
+    echo '{"isSuccess": false,"message" :"Số điện thoại hoặc mật khẩu không hợp lệ"}';
+}
 ?>

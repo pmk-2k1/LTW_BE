@@ -8,48 +8,28 @@ header("Access-Control-Allow-Headers: Content-Disposition, Content-Type, Content
 header("Content-type:application/json");
 
 $data = json_decode(file_get_contents("php://input"));
-if($data == null){
+if ($data == null) {
     echo "{'Error':'Can not get data from UI'}";
     exit;
 }
-$customer = new Customer( $data->isActive, $data->name, $data->phone_number, $data->email, md5($data->password), $data->gender, $data->role, $data->address, $data->birthday);
-$customerData =$customer->returnCustomerArray();
+$customer = new Customer($data->name, $data->phone_number, md5($data->password), $data->address);
+$customerData = $customer->returnCustomerArray();
 $db = new Database();
-
-function getGUID(){
-    if (function_exists('com_create_guid')){
-        return trim(com_create_guid(), '{}');
-    }else{
-        mt_srand((double)microtime()*10000);
-        $charid = strtoupper(md5(uniqid(rand(), true)));
-        $hyphen = chr(45);
-        $uuid = substr($charid, 0, 8).$hyphen
-            .substr($charid, 8, 4).$hyphen
-            .substr($charid,12, 4).$hyphen
-            .substr($charid,16, 4).$hyphen
-            .substr($charid,20,12);
-        return $uuid;
-    }
+if($data->phone_number[0]!='0'){
+    $data->phone_number = "0" + $data->phone_number;
 }
-
-while (true)
-{
-    $GUID = getGUID();
-    $query = "SELECT * FROM customer WHERE Id = '$GUID'";
-    $customerCheck = $db->query($query);
-    if ($customerCheck != false)
-        break;
+$query = "SELECT * FROM customer WHERE Phone_number = '$data->phone_number'";
+$customerCheck = $db->query($query);
+if (count($customerCheck->fetchAll(PDO::FETCH_ASSOC)) > 0) {
+    echo '{"isSuccess": false,"message": "Số điện thoại đã đăng kí"}';
+    exit;
 }
-
-$customerData['id'] = $GUID;
+$customerData['id'] = uniqid($data->phone_number);
 
 try {
-    $db->query("INSERT INTO customer(Id, Is_active, Name, Phone_number, Email, Password, Gender, Role, Address, Birthday)
-    VALUES ('".$customerData['id']."','".$customerData['is_active']."','".$customerData['name']."','".$customerData['phone_number']."','".$customerData['email']."',
-            '".$customerData['password']."','".$customerData['gender']."','".$customerData['role']."','".$customerData['address']."','".$customerData['birthday']."')");
-
-    echo json_encode($customerData);
+    $db->query("INSERT INTO customer(Id, Name, Phone_number, Password, Address)
+    VALUES ('" . $customerData['id'] . "','" .$customerData['name']. "','" .$customerData['phone_number']. "','" .$customerData['password']. "','" .$customerData['address']."')");
+    echo '{"isSuccess": true,"message": "Đăng kí thành công"}';
 } catch (Exception $e) {
-    echo 'Error with: ' .$e->getMessage();
+    echo '{"isSuccess": false , "Error with:  '.$e->getMessage().'"}';
 }
-?>
