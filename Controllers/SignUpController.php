@@ -10,7 +10,7 @@ header("Content-type:application/json");
 
 $data = json_decode(file_get_contents("php://input"));
 if ($data == null) {
-    echo '{"isSuccess": "true", "message": "Can not get data from UI"}';
+    echo '{"isSuccess": false, "message": "Can not get data from UI"}';
     exit;
 }
 
@@ -18,7 +18,7 @@ $customer = new Customer($data->name, $data->phoneNumber, md5($data->password), 
 $customerData = $customer->returnCustomerArray();
 
 $db = new Database();
-if($data->phoneNumber[0]!='0'){
+if(count($data->phoneNumber) > 0 && $data->phoneNumber[0] != '0'){
     $data->phoneNumber = "0" + $data->phoneNumber;
 }
 
@@ -34,7 +34,7 @@ try {
 
     $db->query("INSERT INTO customer(Id, Name, Phone_number, Password, Address)
     VALUES ('" . $customerData['id'] . "','" .$customerData['name']. "','" .$customerData['phoneNumber']. "','" .$customerData['password']. "','" .$customerData['address']."')");
-    echo '{"isSuccess": true,"message": "Đăng kí thành công"}';
+    echo '{"isSuccess": true, "message": "Đăng kí thành công"}';
 } catch (Exception $e) {
     echo '{"isSuccess": false , "message": "Error with:  '.$e->getMessage().'"}';
 }

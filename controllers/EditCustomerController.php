@@ -11,7 +11,7 @@ header("Content-type:application/json");
 
 $data = json_decode(file_get_contents("php://input"));
 if($data == null){
-    echo '{"isSuccess": "true", "message": "Can not get data from UI"}';
+    echo '{"isSuccess": false, "message": "Can not get data from UI"}';
     exit;
 }
 
