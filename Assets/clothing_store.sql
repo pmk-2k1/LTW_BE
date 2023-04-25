@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 18, 2023 at 02:01 AM
+-- Generation Time: Apr 25, 2023 at 05:33 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -33,7 +33,7 @@ CREATE TABLE `bill` (
   `Total` decimal(20,5) NOT NULL DEFAULT 0.00000,
   `Time` datetime NOT NULL,
   `Pay_method` varchar(10) NOT NULL DEFAULT 'Momo',
-  `Note` varchar(2000) DEFAULT NULL,
+  `Note` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `CustomerID` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -47,7 +47,10 @@ CREATE TABLE `bill_detail` (
   `BillID` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `ProductID` char(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `Count` int(10) UNSIGNED NOT NULL DEFAULT 1,
-  `Price_item` decimal(20,5) NOT NULL DEFAULT 0.00000
+  `Price_item` decimal(20,5) NOT NULL DEFAULT 0.00000,
+  `Size` int(2) NOT NULL,
+  `Color` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `Rate` int(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -71,13 +74,13 @@ CREATE TABLE `cart` (
 CREATE TABLE `customer` (
   `Id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `Is_active` tinyint(1) NOT NULL DEFAULT 1,
-  `Name` varchar(30) NOT NULL,
+  `Name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `Phone_number` varchar(12) NOT NULL,
   `Email` varchar(30) NOT NULL,
   `Password` char(32) NOT NULL,
   `Gender` varchar(6) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT 'male',
   `Role` varchar(8) NOT NULL DEFAULT 'customer',
-  `Address` varchar(100) DEFAULT NULL,
+  `Address` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `Birthday` date DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -87,8 +90,11 @@ CREATE TABLE `customer` (
 
 INSERT INTO `customer` (`Id`, `Is_active`, `Name`, `Phone_number`, `Email`, `Password`, `Gender`, `Role`, `Address`, `Birthday`) VALUES
 ('1e70288b-d156-11ed-a5a2-089798e3fef0', 1, 'Hoàng Cao Chí', '0912345678', 'fhdsjkalfsad@gmail.com', 'a@D12345678901234567890123456789', 'male', 'customer', NULL, NULL),
+('31100e15-7931-423d-be78-a10ab488641a', 1, 'Nguyen Van A', '0123456984', '', 'e10adc3949ba59abbe56e057f20f883e', 'male', 'customer', '', NULL),
 ('AFFE02B6-E596-CD3D-E142-9E741E22477B', 1, 'Trần Phàm', '0987654123', 'tran@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'male', 'manager', '', '0000-00-00'),
-('a497391c-d31e-11ed-a78b-089798e3fef0', 1, 'Hoang A', '0123456789', 'hoang@gmail.com', '123456', 'male', 'customer', 'homeless', '2001-04-12');
+('b4b97558-8bf3-425d-a26f-bf6dd5a2bb13', 1, 'Nguyen Van A', '0123456987', '', 'e10adc3949ba59abbe56e057f20f883e', 'male', 'customer', '', NULL),
+('cae1da1c-1ba0-4670-875f-84fd67eed92b', 1, 'Nguyen Van A', '01234569876', '', 'e10adc3949ba59abbe56e057f20f883e', 'male', 'customer', '', NULL),
+('fbb9e56e-cd26-42aa-a07d-5b3cb3e88815', 1, 'Nguyen B', '0123456135', 'nguyenb@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'male', 'manager', '', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -99,7 +105,7 @@ INSERT INTO `customer` (`Id`, `Is_active`, `Name`, `Phone_number`, `Email`, `Pas
 CREATE TABLE `feedback` (
   `CustomerID` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `ProductID` char(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `Content` varchar(5000) DEFAULT NULL,
+  `Content` varchar(5000) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `Start_date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -112,7 +118,7 @@ CREATE TABLE `feedback` (
 CREATE TABLE `image` (
   `Id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `Content` mediumblob NOT NULL,
-  `ProductID` char(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL
+  `ProductID` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -126,7 +132,7 @@ CREATE TABLE `news` (
   `Status` tinyint(1) NOT NULL DEFAULT 0,
   `Start_date` datetime DEFAULT NULL,
   `End_date` datetime DEFAULT NULL,
-  `Content` varchar(5000) DEFAULT NULL
+  `Content` varchar(5000) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -138,12 +144,24 @@ CREATE TABLE `news` (
 CREATE TABLE `product` (
   `Id` char(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `Is_active` tinyint(1) NOT NULL DEFAULT 1,
-  `Name` varchar(100) NOT NULL,
-  `Type` varchar(10) NOT NULL,
+  `Name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
+  `Type` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `Price` decimal(20,5) NOT NULL,
   `Quantity` decimal(10,0) NOT NULL DEFAULT 0,
-  `Description` varchar(5000) DEFAULT NULL
+  `Description` varchar(5000) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `product`
+--
+
+INSERT INTO `product` (`Id`, `Is_active`, `Name`, `Type`, `Price`, `Quantity`, `Description`) VALUES
+('0e9cdf18-5', 1, 'Áo dài', 'Áo', '1200000.00000', '20', 'Mặc mát, thích hợp vào mùa hè'),
+('1f639c17-e', 1, 'Áo phông', 'Áo', '120000.00000', '20', 'Mặc mát, thích hợp vào mùa hè'),
+('73c0a249-5', 1, 'Quần short', 'Quần', '12000.00000', '20', 'Mặc mát, thích hợp vào mùa hè'),
+('800b19ed-e', 1, 'Quần dài', 'Quần', '12000.00000', '20', 'Mặc mát, thích hợp vào mùa hè'),
+('afd33871-0', 1, 'Quần tây', 'Quần', '120000.00000', '20', 'Mặc mát, thích hợp vào mùa hè'),
+('efe49599-4', 1, 'Áo blue', 'Áo', '120000.00000', '20', 'Mặc mát, thích hợp vào mùa hè');
 
 -- --------------------------------------------------------
 
@@ -175,21 +193,22 @@ ALTER TABLE `bill`
 --
 ALTER TABLE `bill_detail`
   ADD PRIMARY KEY (`BillID`,`ProductID`),
-  ADD KEY `BillID` (`BillID`);
+  ADD KEY `BillID` (`BillID`),
+  ADD KEY `FK_bill_detail_product` (`ProductID`);
 
 --
 -- Indexes for table `cart`
 --
 ALTER TABLE `cart`
   ADD PRIMARY KEY (`CustomerID`,`ProductID`),
-  ADD KEY `CustomerID` (`CustomerID`);
+  ADD KEY `CustomerID` (`CustomerID`),
+  ADD KEY `FK_cart_product` (`ProductID`);
 
 --
 -- Indexes for table `customer`
 --
 ALTER TABLE `customer`
   ADD PRIMARY KEY (`Id`),
-  -- ADD UNIQUE KEY `Email` (`Email`),
   ADD UNIQUE KEY `Phone_number` (`Phone_number`);
 
 --
