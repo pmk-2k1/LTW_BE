@@ -20,7 +20,7 @@ try {
     $dataUser = $user->fetch(PDO::FETCH_ASSOC);
     
     if($dataUser == false) {
-        echo '{"isSuccess": "false", "message": "Can not find user with phone number: "' .$data->phoneNumber. '}';
+        echo '{"isSuccess": false, "message": "Can not find user with phone number: "' .$data->phoneNumber. '}';
         exit;
     }
 
@@ -29,8 +29,8 @@ try {
         WHERE Phone_number = '$data->phoneNumber'";
 
     $db->query($sql);
-    echo '{"isSuccess": "true", "message": "Chỉnh sửa thành công"}';
+    echo '{"isSuccess": true, "message": "Chỉnh sửa thành công"}';
 } catch (Exception $e) {
-    echo '{"isSuccess": "false", "message": "Error SQL: ' .$e->getMessage(). '"}';
+    echo '{"isSuccess": false, "message": "Error SQL: ' .$e->getMessage(). '"}';
 }
 ?>
