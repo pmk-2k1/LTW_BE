@@ -13,7 +13,7 @@ $db = new Database();
 
 $sql = "SELECT * FROM product";
 if ($data != null) {
-    $sql .= " WHERE Type = " . $data->type;
+    $sql .= " WHERE Type = '" . $data->type . "'";
 }
 
 try {
