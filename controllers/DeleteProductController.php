@@ -10,22 +10,22 @@ header("Content-type:application/json");
 $data = json_decode(file_get_contents("php://input"));
 
 if($data == null){
-    echo "{'Error':'Can not get data from UI'}";
+    echo '{"isSuccess": false, "message": "Can not get data from UI"}';
     exit;
 }
 $db = new Database();
 
-$select_id = $db->query("SELECT * FROM product WHERE id = '$data->productId'");
-$data_id = $select_id->fetch(PDO::FETCH_ASSOC);
-if($data_id == false) {
-    echo '{"isSuccess": "false", "error": "Can not find user with id: '.$data->productId.'"}';
-    exit;
-}
 try{
+    $select_id = $db->query("SELECT * FROM product WHERE Id = '$data->productId'");
+    $data_id = $select_id->fetch(PDO::FETCH_ASSOC);
+    if($data_id == false) {
+        echo '{"isSuccess": false, "message": "Can not find product with id: '.$data->productId.'"}';
+        exit;
+    }
+
     $sql = "DELETE FROM product WHERE Id = '$data->productId'";
     $deleteProduct = $db->query($sql);
-    // $delete = $deleteProduct->fetch(PDO::FETCH_ASSOC);
-    echo '{"isSuccess": "true", "error": null}';
+    echo '{"isSuccess": true, "message": "Xóa sản phẩm thành công"}';
 }catch(Exception $e){
-    echo '{"isSuccess": "false", "error": "Can not find user with id: '.$e->getMessage().'"}';
+    echo '{"isSuccess": false, "message": "Error SQL: '.$e->getMessage().'"}';
 }

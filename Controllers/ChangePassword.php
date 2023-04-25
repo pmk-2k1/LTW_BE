@@ -24,7 +24,16 @@ try {
         exit;
     }
 
-    $newPass = md5($data->password);
+    $oldPass = md5($data->oldPassword);
+    $checkPass = $db->query("SELECT * FROM customer WHERE Phone_number = '$data->phoneNumber' AND Password = '$oldPass'");
+    $check = $checkPass->fetch(PDO::FETCH_ASSOC);
+    
+    if($check == false) {
+        echo '{"isSuccess": false, "message": "Old password is not correct"}';
+        exit;
+    }
+
+    $newPass = md5($data->newPassword);
     $sql = "UPDATE customer SET Password = '$newPass'
         WHERE Phone_number = '$data->phoneNumber'";
 
