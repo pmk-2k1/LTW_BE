@@ -20,7 +20,7 @@ try {
     $dataUser = $user->fetch(PDO::FETCH_ASSOC);
     
     if($dataUser == false) {
-        echo '{"isSuccess": false, "message": "Can not find user with phone number: "' .$data->phoneNumber. '}';
+        echo '{"isSuccess": false, "message": "Không thể tìm thấy số điện thoại: "' .$data->phoneNumber. '}';
         exit;
     }
 
@@ -29,7 +29,7 @@ try {
     $check = $checkPass->fetch(PDO::FETCH_ASSOC);
     
     if($check == false) {
-        echo '{"isSuccess": false, "message": "Old password is not correct"}';
+        echo '{"isSuccess": false, "message": "Mật khẩu cũ không chính xác"}';
         exit;
     }
 

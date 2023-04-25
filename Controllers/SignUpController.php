@@ -18,13 +18,14 @@ $customer = new Customer($data->name, $data->phoneNumber, md5($data->password), 
 $customerData = $customer->returnCustomerArray();
 
 $db = new Database();
-if(count($data->phoneNumber) > 0 && $data->phoneNumber[0] != '0'){
+if(strlen($data->phoneNumber) > 0 && $data->phoneNumber[0] != '0'){
     $data->phoneNumber = "0" + $data->phoneNumber;
 }
 
 try {
     $query = "SELECT * FROM customer WHERE Phone_number = '$data->phoneNumber'";
     $customerCheck = $db->query($query);
+    
     if (count($customerCheck->fetchAll(PDO::FETCH_ASSOC)) > 0) {
         echo '{"isSuccess": false, "message": "Số điện thoại đã đăng kí"}';
         exit;
