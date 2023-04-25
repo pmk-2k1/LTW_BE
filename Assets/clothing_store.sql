@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 25, 2023 at 05:33 PM
+-- Generation Time: Apr 25, 2023 at 06:11 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -45,7 +45,7 @@ CREATE TABLE `bill` (
 
 CREATE TABLE `bill_detail` (
   `BillID` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `ProductID` char(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `ProductID` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `Count` int(10) UNSIGNED NOT NULL DEFAULT 1,
   `Price_item` decimal(20,5) NOT NULL DEFAULT 0.00000,
   `Size` int(2) NOT NULL,
@@ -61,7 +61,7 @@ CREATE TABLE `bill_detail` (
 
 CREATE TABLE `cart` (
   `CustomerID` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `ProductID` char(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `ProductID` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `Count` int(10) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -92,9 +92,9 @@ INSERT INTO `customer` (`Id`, `Is_active`, `Name`, `Phone_number`, `Email`, `Pas
 ('1e70288b-d156-11ed-a5a2-089798e3fef0', 1, 'Hoàng Cao Chí', '0912345678', 'fhdsjkalfsad@gmail.com', 'a@D12345678901234567890123456789', 'male', 'customer', NULL, NULL),
 ('31100e15-7931-423d-be78-a10ab488641a', 1, 'Nguyen Van A', '0123456984', '', 'e10adc3949ba59abbe56e057f20f883e', 'male', 'customer', '', NULL),
 ('AFFE02B6-E596-CD3D-E142-9E741E22477B', 1, 'Trần Phàm', '0987654123', 'tran@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'male', 'manager', '', '0000-00-00'),
-('b4b97558-8bf3-425d-a26f-bf6dd5a2bb13', 1, 'Nguyen Van A', '0123456987', '', 'e10adc3949ba59abbe56e057f20f883e', 'male', 'customer', '', NULL),
+('b4b97558-8bf3-425d-a26f-bf6dd5a2bb13', 1, 'Nguyen Van A', '0123456987', '', '25f9e794323b453885f5181f1b624d0b', 'male', 'customer', '', NULL),
 ('cae1da1c-1ba0-4670-875f-84fd67eed92b', 1, 'Nguyen Van A', '01234569876', '', 'e10adc3949ba59abbe56e057f20f883e', 'male', 'customer', '', NULL),
-('fbb9e56e-cd26-42aa-a07d-5b3cb3e88815', 1, 'Nguyen B', '0123456135', 'nguyenb@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'male', 'manager', '', '0000-00-00');
+('fbb9e56e-cd26-42aa-a07d-5b3cb3e88815', 1, 'Nguyen B', '0123456135', 'nguyenb@gmail.com', '5baf03061fefc117e70984026e543e04', 'male', 'manager', '', '0000-00-00');
 
 -- --------------------------------------------------------
 
@@ -104,7 +104,7 @@ INSERT INTO `customer` (`Id`, `Is_active`, `Name`, `Phone_number`, `Email`, `Pas
 
 CREATE TABLE `feedback` (
   `CustomerID` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `ProductID` char(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `ProductID` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `Content` varchar(5000) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `Start_date` datetime NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -142,7 +142,7 @@ CREATE TABLE `news` (
 --
 
 CREATE TABLE `product` (
-  `Id` char(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
+  `Id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `Is_active` tinyint(1) NOT NULL DEFAULT 1,
   `Name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `Type` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
@@ -156,12 +156,12 @@ CREATE TABLE `product` (
 --
 
 INSERT INTO `product` (`Id`, `Is_active`, `Name`, `Type`, `Price`, `Quantity`, `Description`) VALUES
-('0e9cdf18-5', 1, 'Áo dài', 'Áo', '1200000.00000', '20', 'Mặc mát, thích hợp vào mùa hè'),
-('1f639c17-e', 1, 'Áo phông', 'Áo', '120000.00000', '20', 'Mặc mát, thích hợp vào mùa hè'),
-('73c0a249-5', 1, 'Quần short', 'Quần', '12000.00000', '20', 'Mặc mát, thích hợp vào mùa hè'),
-('800b19ed-e', 1, 'Quần dài', 'Quần', '12000.00000', '20', 'Mặc mát, thích hợp vào mùa hè'),
-('afd33871-0', 1, 'Quần tây', 'Quần', '120000.00000', '20', 'Mặc mát, thích hợp vào mùa hè'),
-('efe49599-4', 1, 'Áo blue', 'Áo', '120000.00000', '20', 'Mặc mát, thích hợp vào mùa hè');
+('73fe9634-5c32-4571-a1c6-ca3d7ce5ee4e', 1, 'Áo dài', 'Áo', '1200000.00000', '20', 'Mặc mát, thích hợp vào mùa hè'),
+('749dc53a-e383-11ed-901c-089798e3fef0', 1, 'Quần short', 'Quần', '12000.00000', '20', 'Mặc mát, thích hợp vào mùa hè'),
+('749dee01-e383-11ed-901c-089798e3fef0', 1, 'Áo blue', 'Áo', '120000.00000', '20', 'Mặc mát, thích hợp vào mùa hè'),
+('81d2876a-e383-11ed-901c-089798e3fef0', 1, 'Quần dài', 'Quần', '12000.00000', '20', 'Mặc mát, thích hợp vào mùa hè'),
+('8be77bbf-e383-11ed-901c-089798e3fef0', 1, 'Quần tây', 'Quần', '120000.00000', '20', 'Mặc mát, thích hợp vào mùa hè'),
+('9c017aad-e383-11ed-901c-089798e3fef0', 1, 'Áo phông', 'Áo', '120000.00000', '20', 'Mặc mát, thích hợp vào mùa hè');
 
 -- --------------------------------------------------------
 
@@ -265,20 +265,20 @@ ALTER TABLE `bill_detail`
 --
 ALTER TABLE `cart`
   ADD CONSTRAINT `FK_cart_customer` FOREIGN KEY (`CustomerID`) REFERENCES `customer` (`Id`) ON UPDATE CASCADE,
-  ADD CONSTRAINT `FK_cart_product` FOREIGN KEY (`ProductID`) REFERENCES `product` (`Id`) ON UPDATE CASCADE;
+  ADD CONSTRAINT `FK_cart_product` FOREIGN KEY (`ProductID`) REFERENCES `product` (`Id`);
 
 --
 -- Constraints for table `feedback`
 --
 ALTER TABLE `feedback`
   ADD CONSTRAINT `FK_feedback_customer` FOREIGN KEY (`CustomerID`) REFERENCES `customer` (`Id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  ADD CONSTRAINT `FK_feedback_product` FOREIGN KEY (`ProductID`) REFERENCES `product` (`Id`) ON DELETE NO ACTION ON UPDATE NO ACTION;
+  ADD CONSTRAINT `FK_feedback_product` FOREIGN KEY (`ProductID`) REFERENCES `product` (`Id`);
 
 --
 -- Constraints for table `image`
 --
 ALTER TABLE `image`
-  ADD CONSTRAINT `FK_image_product` FOREIGN KEY (`ProductID`) REFERENCES `product` (`Id`);
+  ADD CONSTRAINT `FK_image_product` FOREIGN KEY (`ProductID`) REFERENCES `product` (`Id`) ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
