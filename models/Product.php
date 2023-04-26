@@ -35,11 +35,11 @@ class Product
         $this->productPrice = $productPrice;
         $this->productQuantity = $productQuantity;
         $this->productDescription = $productDescription;
-        $this->$material = $material;
-        $this->$style = $style;
-        $this->$album = $album;
-        $this->$model = $model;
-        $this->$connect = $connect;
+        $this->material = $material;
+        $this->style = $style;
+        $this->album = $album;
+        $this->model = $model;
+        $this->connect = $connect;
     }
 
     public function getProductID()
