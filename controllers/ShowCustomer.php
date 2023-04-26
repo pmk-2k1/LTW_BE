@@ -4,10 +4,14 @@ require_once '..\config\database.php';
 header('Access-Control-Allow-Origin: *');
 header("Access-Control-Allow-Methods: GET");
 header("Access-Control-Allow-Headers: Content-Disposition, Content-Type, Content-Length, Accept-Encoding");
-header("Content-type:application/json");
+header("Content-type: application/json");
 
 
 $data = json_decode(file_get_contents("php://input"));
+if ($data == null) {
+    echo '{"isSuccess": false, "message": "Can not get data from UI"}';
+    exit;
+}
 
 $db = new Database();
 

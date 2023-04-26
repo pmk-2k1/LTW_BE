@@ -1,6 +1,5 @@
 <?php
 require_once '..\config\database.php';
-require_once 'GetImages.php';
 
 header('Access-Control-Allow-Origin: *');
 header("Access-Control-Allow-Methods: GET");
@@ -9,6 +8,10 @@ header("Content-type: application/json");
 
 
 $data = json_decode(file_get_contents("php://input"));
+if ($data == null) {
+    echo '{"isSuccess": false, "message": "Can not get data from UI"}';
+    exit;
+}
 
 $db = new Database();
 
@@ -23,12 +26,6 @@ try {
 
 
     if ($product == true) {
-        for ($i = 0; $i < count($product); $i++) {
-            // $imageQuery = $db->query("SELECT `Content` FROM image WHERE ProductID = '" . $product[$i]['Id'] . "'");
-            // echo json_encode($imageQuery->fetchAll(PDO::FETCH_ASSOC));
-            // exit;
-            $product[$i]['image'] = GetImages($product[$i]['Id']);
-        }
         echo '{"isSuccess": true, "message": "Thành công", "data": ' . json_encode($product) . '}';
     } else {
         echo '{"isSuccess": false, "message": "Hết hàng"}';
