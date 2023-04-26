@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 26, 2023 at 09:01 AM
+-- Generation Time: Apr 26, 2023 at 08:29 PM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -179,27 +179,32 @@ CREATE TABLE `product` (
   `Type` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `Price` decimal(20,5) NOT NULL,
   `Quantity` decimal(10,0) NOT NULL DEFAULT 0,
-  `Description` varchar(5000) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL
+  `Description` varchar(5000) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
+  `Material` varchar(1000) DEFAULT NULL,
+  `Style` varchar(1000) DEFAULT NULL,
+  `Album` varchar(1000) DEFAULT NULL,
+  `Model` varchar(1000) DEFAULT NULL,
+  `Connect` varchar(1000) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `product`
 --
 
-INSERT INTO `product` (`Id`, `Is_active`, `Name`, `Type`, `Price`, `Quantity`, `Description`) VALUES
-('001cd400-b52a-46b2-8993-050639d5f7c4', 1, 'Đầm vàng', 'Đầm', '600000.00000', '20', 'Mặc mát, thích hợp vào mùa hè'),
-('2a385955-39ea-44a3-be16-9be55e4540de', 1, 'Sơ mi', 'Áo', '400000.00000', '20', 'Mặc mát, thích hợp vào mùa hè'),
-('5e1848c8-0348-47a6-bef6-e164f670ab12', 1, 'Đầm hồng', 'Đầm', '450000.00000', '20', 'Mặc mát, thích hợp vào mùa hè'),
-('68819863-7f7a-4493-a808-4b657e7da961', 1, 'Áo vest', 'Áo', '1200000.00000', '20', 'Mặc mát, thích hợp vào mùa hè'),
-('73fe9634-5c32-4571-a1c6-ca3d7ce5ee4e', 1, 'Áo dài', 'Áo', '1200000.00000', '20', 'Mặc mát, thích hợp vào mùa hè'),
-('749dc53a-e383-11ed-901c-089798e3fef0', 1, 'Quần short', 'Quần', '12000.00000', '20', 'Mặc mát, thích hợp vào mùa hè'),
-('749dee01-e383-11ed-901c-089798e3fef0', 1, 'Áo blue', 'Áo', '120000.00000', '20', 'Mặc mát, thích hợp vào mùa hè'),
-('81d2876a-e383-11ed-901c-089798e3fef0', 1, 'Quần dài', 'Quần', '12000.00000', '20', 'Mặc mát, thích hợp vào mùa hè'),
-('82306123-643e-400e-bfdc-d8b6b7848abf', 1, 'Áo len', 'Áo', '1200000.00000', '20', 'Mặc mát, thích hợp vào mùa hè'),
-('8be77bbf-e383-11ed-901c-089798e3fef0', 1, 'Quần tây', 'Quần', '120000.00000', '20', 'Mặc mát, thích hợp vào mùa hè'),
-('9c017aad-e383-11ed-901c-089798e3fef0', 1, 'Áo phông', 'Áo', '120000.00000', '20', 'Mặc mát, thích hợp vào mùa hè'),
-('9e8f2fca-5d7d-4556-8b33-4c39ff272ff7', 1, 'Quần đen', 'Quần', '300000.00000', '20', 'Mặc mát, thích hợp vào mùa hè'),
-('cfd97690-9690-4ce0-bee2-f2f933e78f2a', 1, 'Quần kaki', 'Quần', '360000.00000', '20', 'Mặc mát, thích hợp vào mùa hè');
+INSERT INTO `product` (`Id`, `Is_active`, `Name`, `Type`, `Price`, `Quantity`, `Description`, `Material`, `Style`, `Album`, `Model`, `Connect`) VALUES
+('001cd400-b52a-46b2-8993-050639d5f7c4', 1, 'Đầm vàng', 'Đầm', '600000.00000', '20', 'Mặc mát, thích hợp vào mùa hè', NULL, NULL, NULL, NULL, NULL),
+('2a385955-39ea-44a3-be16-9be55e4540de', 1, 'Sơ mi', 'Áo', '400000.00000', '20', 'Mặc mát, thích hợp vào mùa hè', NULL, NULL, NULL, NULL, NULL),
+('5e1848c8-0348-47a6-bef6-e164f670ab12', 1, 'Đầm hồng', 'Đầm', '450000.00000', '20', 'Mặc mát, thích hợp vào mùa hè', NULL, NULL, NULL, NULL, NULL),
+('68819863-7f7a-4493-a808-4b657e7da961', 1, 'Áo vest', 'Áo', '1200000.00000', '20', 'Mặc mát, thích hợp vào mùa hè', NULL, NULL, NULL, NULL, NULL),
+('73fe9634-5c32-4571-a1c6-ca3d7ce5ee4e', 1, 'Áo dài', 'Áo', '1200000.00000', '20', 'Mặc mát, thích hợp vào mùa hè', NULL, NULL, NULL, NULL, NULL),
+('749dee01-e383-11ed-901c-089798e3fef0', 1, 'Áo blue', 'Áo', '120000.00000', '20', 'Mặc mát, thích hợp vào mùa hè', NULL, NULL, NULL, NULL, NULL),
+('81d2876a-e383-11ed-901c-089798e3fef0', 1, 'Quần dài', 'Quần', '12000.00000', '20', 'Mặc mát, thích hợp vào mùa hè', NULL, NULL, NULL, NULL, NULL),
+('82306123-643e-400e-bfdc-d8b6b7848abf', 1, 'Áo len', 'Áo', '1200000.00000', '20', 'Mặc mát, thích hợp vào mùa hè', NULL, NULL, NULL, NULL, NULL),
+('8be77bbf-e383-11ed-901c-089798e3fef0', 1, 'Quần tây', 'Quần', '120000.00000', '20', 'Mặc mát, thích hợp vào mùa hè', NULL, NULL, NULL, NULL, NULL),
+('9c017aad-e383-11ed-901c-089798e3fef0', 1, 'Áo phông', 'Áo', '120000.00000', '20', 'Mặc mát, thích hợp vào mùa hè', NULL, NULL, NULL, NULL, NULL),
+('9e8f2fca-5d7d-4556-8b33-4c39ff272ff7', 1, 'Quần đen', 'Quần', '300000.00000', '20', 'Mặc mát, thích hợp vào mùa hè', NULL, NULL, NULL, NULL, NULL),
+('b5c29f7b-6243-4d0d-8f1e-17b9dcc23cb9', 1, 'Quần short', 'Quần', '360000.00000', '20', 'Mặc mát, thích hợp vào mùa hè', '', '', '', '', ''),
+('cfd97690-9690-4ce0-bee2-f2f933e78f2a', 1, 'Quần kaki', 'Quần', '360000.00000', '20', 'Mặc mát, thích hợp vào mùa hè', NULL, NULL, NULL, NULL, NULL);
 
 -- --------------------------------------------------------
 
