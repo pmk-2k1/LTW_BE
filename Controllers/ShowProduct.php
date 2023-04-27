@@ -19,7 +19,10 @@ try {
     $product = $database->fetchAll(PDO::FETCH_ASSOC);
 
     if ($product == true) {
-        $product['image'] = array("abcv", "asdf");
+        for ($i = 0; $i < count($product); $i++) {
+            $imgs = $db->query("SELECT `Main`, `Content` FROM image WHERE ProductID = '" . $product[$i]['Id'] . "'");
+            $product[$i]['image'] = $imgs->fetchAll(PDO::FETCH_ASSOC);
+        }
         echo '{"isSuccess": true, "message": "Thành công", "data": ' . json_encode($product) . '}';
     } else {
         echo '{"isSuccess": false, "message": "Hết hàng"}';
