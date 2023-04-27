@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 27, 2023 at 11:10 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.29
+-- Generation Time: Apr 27, 2023 at 11:56 PM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -35,7 +35,7 @@ CREATE TABLE `bill` (
   `Pay_method` varchar(10) NOT NULL DEFAULT 'Momo',
   `Note` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `CustomerID` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -44,7 +44,6 @@ CREATE TABLE `bill` (
 --
 
 CREATE TABLE `bill_detail` (
-  `Id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `BillID` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `ProductID` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `Count` int(10) UNSIGNED NOT NULL DEFAULT 1,
@@ -52,7 +51,7 @@ CREATE TABLE `bill_detail` (
   `Size` int(2) NOT NULL,
   `Color` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `Rate` int(1) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -64,7 +63,7 @@ CREATE TABLE `cart` (
   `CustomerID` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `ProductID` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `Count` int(10) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -83,7 +82,7 @@ CREATE TABLE `customer` (
   `Role` varchar(8) NOT NULL DEFAULT 'customer',
   `Address` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `Birthday` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `customer`
@@ -109,7 +108,7 @@ CREATE TABLE `feedback` (
   `ProductID` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `Content` varchar(5000) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `Start_date` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -122,7 +121,7 @@ CREATE TABLE `image` (
   `Content` varchar(500) NOT NULL,
   `Main` tinyint(1) NOT NULL DEFAULT 0,
   `ProductID` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `image`
@@ -136,12 +135,12 @@ INSERT INTO `image` (`Id`, `Content`, `Main`, `ProductID`) VALUES
 ('10e5e782-44e6-49cc-b21c-a3f88ba1a86a', 'https://product.hstatic.net/200000182297/product/43_49842837958449f2bb5ed995a1127341_master.jpg', 1, 'c6d4928e-5dd2-4619-b597-f531325895fa'),
 ('13d842ec-ae22-4a39-8136-742005bb5ff8', 'https://product.hstatic.net/200000182297/product/ad159021582215000458p1499dt_q172921782214030401p699dt_20c6a9de88b549f59299d02c153d1986_master.jpg', 0, 'ba09f81e-e926-49bb-8901-20df5e157626'),
 ('19417453-1e98-4052-b605-4c91aef86c9f', 'https://product.hstatic.net/200000182297/product/j013021962212020474p799dt_4__d995b38f1beb425ab4f4fde5014f5c0a_master.jpg', 0, 'a579b747-778f-4baa-a93c-eeec5eefa9d0'),
-('19d05c20-18c2-46a5-b6d5-e677dcd34149', 'https://product.hstatic.net/200000182297/product/d432621412382000274p599dt_3__25485f4d7e1a4f9a820415036df6c356_master.jpg', 0, 'b89e62d5-b4f1-4f14-bbca-d88efc58447a'),
 ('2254fbdc-659a-4ee7-9ae7-3bf6d6b4ca1b', 'https://product.hstatic.net/200000182297/product/ts600121902332030462p299dt_q205921702312050457p599dt_3__5a24d365f0d7495ebd12009d3d3a4a35_master.jpg', 0, '65edc9ef-6773-45df-8a0f-2949850ba645'),
 ('2a63b6cf-3f36-46d1-8759-acbee95cf87a', 'https://product.hstatic.net/200000182297/product/d203621412312160405p1399dt_f66f0be27d164b0d91d9ae2f9719178c_master.jpg', 0, '608f0956-8d2b-4c27-bf85-8908f5b1cdf7'),
 ('2bb45fe3-4639-4307-a1b2-4b793c5a8413', 'https://product.hstatic.net/200000182297/product/210_bf511813b79a410a9916467e7383c698_master.jpg', 1, 'f9f311c5-62f8-41e1-a5d6-defa0abd634b'),
 ('2d2a7ef3-f07c-4e29-9724-3d829536f548', 'https://product.hstatic.net/200000182297/product/d191621412352110401p1399dt_1__0bfa8db0b6b849768dcf5fd858b81d5b_master.jpg', 0, 'd28c6612-0006-47f2-92b0-3b4856822323'),
 ('315f6e01-8afd-4940-94ac-0c9a7ff21e30', 'https://product.hstatic.net/200000182297/product/ad099421582223030658p1759dt_q108821782223050401p599dt_4__1ac4f97cd7aa4589893e9c6eeb7f9da9_master.jpg', 0, '96934f7d-90c5-4c5e-a52e-633cf6123650'),
+('31de9c33-30ed-4219-956a-807a939c08ed', 'https://product.hstatic.net/200000182297/product/2_9d881f3f665344f1bf3777735cf334e3_master.jpg', 1, '219971e4-a0c4-4699-bbed-5ce8ba211175'),
 ('32eebd89-2c00-4a99-8b4a-41154059a21e', 'https://product.hstatic.net/200000182297/product/2_6958d81e54a642a6a155b32a20e1979d_master.jpg', 1, 'ba09f81e-e926-49bb-8901-20df5e157626'),
 ('33986087-16c9-4410-b875-fa97b39cc4bf', 'https://product.hstatic.net/200000182297/product/j012921962212400426p999dt_2__05cfd5f308624bc39da52697da626ae7_master.jpg', 0, 'e9be9e63-0702-4bc2-b3df-01d766cabf4e'),
 ('33ae9d6e-63ba-4301-b31f-f8d1e00c8cc8', 'https://product.hstatic.net/200000182297/product/d020021412362420674p1399dt_ef8bcfa3fa8f4fd0b686922e0d5d8ba0_master.jpg', 0, '4090ac8e-d1b1-4479-836e-09c63eb822d2'),
@@ -150,6 +149,7 @@ INSERT INTO `image` (`Id`, `Content`, `Main`, `ProductID`) VALUES
 ('416e52e7-ff86-4cd8-88ec-66e5bc14f68c', 'https://product.hstatic.net/200000182297/product/ad128521582224720458p1499dt_q128621782224040418p699dt_4__377f8320ebe2418a823a35e28f8a8b19_master.jpg', 0, 'f1d6cc6d-becb-4f18-8ccf-398a70ee9d2d'),
 ('494757b7-d7f8-49c0-a795-b5fecb138748', 'https://product.hstatic.net/200000182297/product/sm182121222332420401p799dt_z083021522213130674p699dt_1__7c836f4b1b1b4248a437dbe3a184e706_master.jpg', 0, '420f1322-8d35-4290-b909-6b1f7abc739f'),
 ('4d221236-9040-428f-accb-a0667c80d1a9', 'https://product.hstatic.net/200000182297/product/ak401221312352160457p399dt_z401121542382160457p399dt_4__2388328dd9f545fb96efce4fe24c11eb_master.jpg', 0, 'fe85aefc-94cd-4c6c-961d-9d8aaa418dff'),
+('52ca2a01-6f1d-4ef1-90ab-53698ad64f46', 'https://product.hstatic.net/200000182297/product/d432621412382000274p599dt_21632c5dc1fd4cfd96636b43c08dbf2c_master.jpg', 0, '219971e4-a0c4-4699-bbed-5ce8ba211175'),
 ('5436e47b-537f-42f1-8d48-e79ed4890cab', 'https://product.hstatic.net/200000182297/product/19_22ea2a2036b041a3a3a35f71834dacd9_master.jpg', 1, 'e9be9e63-0702-4bc2-b3df-01d766cabf4e'),
 ('5774bba3-ded2-4514-bc4f-714da9799ff2', 'https://product.hstatic.net/200000182297/product/sm425521232231000257p429dt_q432421722322110474p429dt_3f7ad9cb48df4c29a3c4f81fc3e67b96_master.jpg', 0, '4459e863-fd78-4ded-b5a0-28fa9580ce37'),
 ('5f9a3ffb-c5f2-4073-96b9-84df3066521c', 'https://product.hstatic.net/200000182297/product/ad091821582213030401p1899dt_q091921782223030401p599dt_1__556aa0e67f50405d9ad190d4847c132e_master.jpg', 0, '4626c92a-5c3c-46b4-b25b-1eb558970c8a'),
@@ -169,14 +169,12 @@ INSERT INTO `image` (`Id`, `Content`, `Main`, `ProductID`) VALUES
 ('8c0b71ba-22c9-4b3b-b6f6-5e7dc2663921', 'https://product.hstatic.net/200000182297/product/5_a93c4dcf98c94defaee40045d93ecbf7_master.jpg', 1, 'b89e62d5-b4f1-4f14-bbca-d88efc58447a'),
 ('96997556-3790-45f6-b353-62bc5060e3ed', 'https://product.hstatic.net/200000182297/product/sm194121232332030457p799dt_z206021522382110447p699dt_4__9870cfe31b864bffb3b7e402e34eadee_master.jpg', 0, '6796cad8-04b8-4258-8048-6d44b08d9b5e'),
 ('9777a93e-6cff-42e5-94ce-d40122bf2963', 'https://product.hstatic.net/200000182297/product/d203621412312160405p1399dt_2__cb5f0198fcfa472a8afd6a38477d1153_master.jpg', 0, '608f0956-8d2b-4c27-bf85-8908f5b1cdf7'),
-('9bcaa257-6145-44f0-9501-40abc4f8d1e1', 'https://product.hstatic.net/200000182297/product/2_9d881f3f665344f1bf3777735cf334e3_master.jpg', 1, 'b89e62d5-b4f1-4f14-bbca-d88efc58447a'),
 ('a01d38ff-1e92-485c-9c06-21889bf99869', 'https://product.hstatic.net/200000182297/product/sm195621222352169018p999dt_q670521732230900432p699dt_5__296e834c4ed1452cab4197c374564375_master.jpg', 0, '4a125cf4-c3a8-4dc8-bde3-2a3473f98681'),
 ('a20c1c51-0e86-4840-b979-c9978887d901', 'https://product.hstatic.net/200000182297/product/22_7779da7751654ff5844e409c83238c31_master.jpg', 1, 'f1d6cc6d-becb-4f18-8ccf-398a70ee9d2d'),
 ('a719f670-2fbd-427b-b348-c2164521dfac', 'https://product.hstatic.net/200000182297/product/5_3d5eef22ad804b81848fb4bfc3c2f0c4_master.jpg', 1, '8dafd7d6-4bfa-4085-a0f7-e4c37e8ff3b7'),
 ('a940959d-1a0c-40d8-8369-b12d05bd330d', 'https://product.hstatic.net/200000182297/product/4_e9d22bff0d834a98a9186681261199bd_master.jpg', 1, '4a125cf4-c3a8-4dc8-bde3-2a3473f98681'),
 ('b1ee07a0-85c6-4013-90b9-d8bd074b584b', 'https://product.hstatic.net/200000182297/product/j048821962212400458p1399dt_44beb51a530d499da8dd49b21fd961f5_master.jpg', 0, '8dafd7d6-4bfa-4085-a0f7-e4c37e8ff3b7'),
 ('b2e943e8-1c10-4278-a1eb-8f1cce595009', 'https://product.hstatic.net/200000182297/product/d195021412362040418p1599dt_2__463f3ca8b58f40edab8174486cba6a2f_master.jpg', 0, 'b89e62d5-b4f1-4f14-bbca-d88efc58447a'),
-('b4cb3854-5c38-4a20-a81b-5fc3bcc45e5a', 'https://product.hstatic.net/200000182297/product/d432621412382000274p599dt_21632c5dc1fd4cfd96636b43c08dbf2c_master.jpg', 0, 'b89e62d5-b4f1-4f14-bbca-d88efc58447a'),
 ('b50c8c4e-f9de-40b9-ab34-190db0c65695', 'https://product.hstatic.net/200000182297/product/2_dc797f567b934a4a870a258b98376c2c_master.jpg', 1, '608f0956-8d2b-4c27-bf85-8908f5b1cdf7'),
 ('b58d886c-fd7f-499c-aaef-2403186340d4', 'https://product.hstatic.net/200000182297/product/3_a75a636b559f4f199a8bcd4df7bb3fb3_master.jpg', 1, '4090ac8e-d1b1-4479-836e-09c63eb822d2'),
 ('c3f3ccfa-12ff-4e85-b391-43fcaf5a69eb', 'https://product.hstatic.net/200000182297/product/d195021412362040418p1599dt_4d483fc14fcb4549ac9f9020503c1845_master.jpg', 0, 'b89e62d5-b4f1-4f14-bbca-d88efc58447a'),
@@ -185,6 +183,7 @@ INSERT INTO `image` (`Id`, `Content`, `Main`, `ProductID`) VALUES
 ('cb63917c-4d98-4f91-be8e-c38a01821677', 'https://product.hstatic.net/200000182297/product/d020021412362420674p1399dt_3__c7ab01612ca24944b98d814a95afb038_master.jpg', 0, '4090ac8e-d1b1-4479-836e-09c63eb822d2'),
 ('ce4eb0d8-0a18-4e93-a125-30f9e9063c3b', 'https://product.hstatic.net/200000182297/product/j048821962212400458p1399dt_3__dbc049950ab94463acf342224742ba3f_master.jpg', 0, '8dafd7d6-4bfa-4085-a0f7-e4c37e8ff3b7'),
 ('cfdffc8b-25fe-4402-8a88-0d85fa95e9a3', 'https://product.hstatic.net/200000182297/product/hw036521742312000401p599dt_b86326ab5ac84e31a9a8ade1fb9012d1_master.jpg', 0, '80333cd7-ae8b-4fed-957d-62939c4d3d5f'),
+('d3f3d0a2-dcad-4c23-84bd-65917c1c015f', 'https://product.hstatic.net/200000182297/product/d432621412382000274p599dt_3__25485f4d7e1a4f9a820415036df6c356_master.jpg', 0, '219971e4-a0c4-4699-bbed-5ce8ba211175'),
 ('d8d5796f-5143-4362-bd4b-ed166aa3b2bf', 'https://product.hstatic.net/200000182297/product/1_5869f370b1c74829bf3ce79c6f2d16f2_master.jpg', 1, 'fe85aefc-94cd-4c6c-961d-9d8aaa418dff'),
 ('da60e3f1-9cd4-4a70-bc0f-622c500a612b', 'https://product.hstatic.net/200000182297/product/ad128521582224720458p1499dt_q128621782224040418p699dt_3__5df055654a464fff8c5d44e7f7f8bee2_master.jpg', 0, 'f1d6cc6d-becb-4f18-8ccf-398a70ee9d2d'),
 ('e382e3c8-5311-4fed-8afd-ff43747ab09f', 'https://product.hstatic.net/200000182297/product/sm194121232332030457p799dt_z206021522382110447p699dt_9a73aa1f7a5841648d82bfb2bc430e23_master.jpg', 0, '6796cad8-04b8-4258-8048-6d44b08d9b5e'),
@@ -214,7 +213,7 @@ CREATE TABLE `news` (
   `Start_date` datetime DEFAULT NULL,
   `End_date` datetime DEFAULT NULL,
   `Content` varchar(5000) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -235,7 +234,7 @@ CREATE TABLE `product` (
   `Album` varchar(1000) DEFAULT NULL,
   `Model` varchar(1000) DEFAULT NULL,
   `Connect` varchar(1000) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `product`
@@ -279,7 +278,7 @@ CREATE TABLE `voucher` (
   `Percent` decimal(5,2) NOT NULL DEFAULT 0.00,
   `Start_date` datetime NOT NULL,
   `End_date` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indexes for dumped tables
@@ -296,7 +295,7 @@ ALTER TABLE `bill`
 -- Indexes for table `bill_detail`
 --
 ALTER TABLE `bill_detail`
-  ADD PRIMARY KEY (`Id`),
+  ADD PRIMARY KEY (`BillID`,`ProductID`),
   ADD KEY `BillID` (`BillID`),
   ADD KEY `FK_bill_detail_product` (`ProductID`);
 
