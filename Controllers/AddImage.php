@@ -24,8 +24,8 @@ try {
         exit;
     }
 
-    $db->query("INSERT INTO image(Id, Content, ProductID)
-    VALUES ('" .generate_uuid(). "','" .$data->image. "','" .$productID[0]['Id']. "')");
+    $db->query("INSERT INTO image(Id, Content, Main, ProductID)
+    VALUES ('" .generate_uuid(). "','" .$data->image. "','" .$data->main. "','" .$productID[0]['Id']. "')");
     echo '{"isSuccess": true, "message": "Thêm sản phẩm thành công"}';
 } catch (Exception $e) {
     echo '{"isSuccess": false , "message": "Error SQL: '.$e->getMessage().'"}';
