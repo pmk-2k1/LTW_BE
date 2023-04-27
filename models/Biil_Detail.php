@@ -1,6 +1,7 @@
 <?php
 class BillDetail
 {
+    private $id;
     private $billID;
     private $productID;
     private $count;
@@ -9,8 +10,9 @@ class BillDetail
     private $color;
     private $rate;
 
-    public function __construct($billID, $productID, $count, $priceItem, $size, $color, $rate)
+    public function __construct($id, $billID, $productID, $count, $priceItem, $size, $color, $rate)
     {
+        $this->id = $id;
         $this->billID = $billID;
         $this->productID = $productID;
         $this->count = $count;
@@ -23,6 +25,7 @@ class BillDetail
     public function returnBillArray()
     {
         $bill_detail = array();
+        $bill_detail['id'] = $this->id;
         $bill_detail['billID'] = $this->billID;
         $bill_detail['productID'] = $this->productID;
         $bill_detail['count'] = $this->count;
