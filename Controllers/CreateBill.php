@@ -6,7 +6,7 @@ require_once '..\Common\Utils\helper.php';
 header('Access-Control-Allow-Origin: *');
 header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Allow-Headers: Content-Disposition, Content-Type, Content-Length, Accept-Encoding");
-header("Content-type:application/json");
+header("Content-type: application/json");
 
 $data = json_decode(file_get_contents("php://input"));
 if ($data == null) {
@@ -14,27 +14,23 @@ if ($data == null) {
     exit;
 }
 
-$customer = new Customer($data->name, $data->phoneNumber, md5($data->password), $data->address);
-$customerData = $customer->returnCustomerArray();
+$datetime = new DateTime('now', new DateTimeZone('UTC'));
+$bill = new Bill(generate_uuid(), $data->status, $data->total, $datetime->format('Y-m-d H:i:s'), $data->method, $data->note, $data->customerID);
+$billData = $bill->returnBillArray();
 
 $db = new Database();
-if(strlen($data->phoneNumber) > 0 && $data->phoneNumber[0] != '0'){
-    $data->phoneNumber = "0" + $data->phoneNumber;
-}
 
 try {
-    $query = "SELECT * FROM customer WHERE Phone_number = '$data->phoneNumber'";
+    $query = "SELECT * FROM customer WHERE Id = '" .$billData['customerID']. "'";
     $customerCheck = $db->query($query);
     
-    if (count($customerCheck->fetchAll(PDO::FETCH_ASSOC)) > 0) {
-        echo '{"isSuccess": false, "message": "Số điện thoại đã đăng kí"}';
+    if (count($customerCheck->fetchAll(PDO::FETCH_ASSOC)) == 0) {
+        echo '{"isSuccess": false, "message": "Người dùng không tồn tại"}';
         exit;
     }
-    
-    $customerData['id'] = generate_uuid();
 
     $db->query("INSERT INTO customer(Id, Name, Phone_number, Password, Address)
-    VALUES ('" . $customerData['id'] . "','" .$customerData['name']. "','" .$customerData['phoneNumber']. "','" .$customerData['password']. "','" .$customerData['address']."')");
+    VALUES ('" . $billData['id'] . "','" .$billData['name']. "','" .$billData['phoneNumber']. "','" .$billData['password']. "','" .$billData['address']."')");
     echo '{"isSuccess": true, "message": "Đăng kí thành công"}';
 } catch (Exception $e) {
     echo '{"isSuccess": false , "message": "Error SQL: '.$e->getMessage().'"}';
