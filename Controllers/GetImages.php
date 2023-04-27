@@ -21,7 +21,9 @@ try {
     $image = $database->fetchAll(PDO::FETCH_ASSOC);
     
     if ($image == true) {
-        echo json_encode($image);
+        header('Content-Type: image/jpeg');
+        // header("Content-type:application/json");
+        echo count($image);
     }
     else
     {

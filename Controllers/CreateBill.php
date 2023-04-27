@@ -14,13 +14,13 @@ if ($data == null) {
     exit;
 }
 
-$datetime = new DateTime('now', new DateTimeZone('UTC'));
-$bill = new Bill(generate_uuid(), $data->status, $data->total, $datetime->format('Y-m-d H:i:s'), $data->method, $data->note, $data->customerID);
-$billData = $bill->returnBillArray();
-
 $db = new Database();
 
 try {
+    $datetime = new DateTime('now', new DateTimeZone('UTC'));
+    $bill = new Bill(generate_uuid(), $data->status, $data->total, $datetime->format('Y-m-d H:i:s'), $data->method, $data->note, $data->customerID);
+    $billData = $bill->returnBillArray();
+
     $query = "SELECT * FROM customer WHERE Id = '" .$billData['customerID']. "'";
     $customerCheck = $db->query($query);
     
@@ -29,9 +29,9 @@ try {
         exit;
     }
 
-    $db->query("INSERT INTO customer(Id, Name, Phone_number, Password, Address)
-    VALUES ('" . $billData['id'] . "','" .$billData['name']. "','" .$billData['phoneNumber']. "','" .$billData['password']. "','" .$billData['address']."')");
-    echo '{"isSuccess": true, "message": "Đăng kí thành công"}';
+    // $db->query("INSERT INTO customer(Id, Name, Phone_number, Password, Address)
+    // VALUES ('" . $billData['id'] . "','" .$billData['name']. "','" .$billData['phoneNumber']. "','" .$billData['password']. "','" .$billData['address']."')");
+    // echo '{"isSuccess": true, "message": "Đăng kí thành công"}';
 } catch (Exception $e) {
     echo '{"isSuccess": false , "message": "Error SQL: '.$e->getMessage().'"}';
 }

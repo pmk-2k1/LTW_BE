@@ -7,22 +7,10 @@ header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Allow-Headers: Content-Disposition, Content-Type, Content-Length, Accept-Encoding");
 header("Content-type: application/json");
 
-if (!isset($_POST['data'])) {
+$data = json_decode(file_get_contents("php://input"));
+if ($data == null) {
     echo '{"isSuccess": false, "message": "Can not get data from UI"}';
     exit;
-} else {
-    $data = json_decode($_POST['data']);
-}
-// echo json_encode($data);
-// exit;
-
-if (!isset($_FILES['image'])) {
-    echo '{"isSuccess": false, "message": "Can not get image from UI"}';
-    exit;
-} else {
-    $tmpName = $_FILES['image']['tmp_name'];
-    // $content = file_get_contents($tmpName);
-    // echo json_encode(gettype($content));
 }
 
 $db = new Database();
@@ -37,7 +25,7 @@ try {
     }
 
     $db->query("INSERT INTO image(Id, Content, ProductID)
-    VALUES ('" .generate_uuid(). "','" .$tmpName. "','" .$productID[0]['Id']. "')");
+    VALUES ('" .generate_uuid(). "','" .$data->image. "','" .$productID[0]['Id']. "')");
     echo '{"isSuccess": true, "message": "Thêm sản phẩm thành công"}';
 } catch (Exception $e) {
     echo '{"isSuccess": false , "message": "Error SQL: '.$e->getMessage().'"}';
