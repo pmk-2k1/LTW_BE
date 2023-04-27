@@ -3,9 +3,9 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 26, 2023 at 08:29 PM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.29
+-- Generation Time: Apr 27, 2023 at 08:15 AM
+-- Server version: 10.4.27-MariaDB
+-- PHP Version: 8.1.12
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -35,7 +35,7 @@ CREATE TABLE `bill` (
   `Pay_method` varchar(10) NOT NULL DEFAULT 'Momo',
   `Note` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `CustomerID` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -51,7 +51,7 @@ CREATE TABLE `bill_detail` (
   `Size` int(2) NOT NULL,
   `Color` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `Rate` int(1) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -63,7 +63,7 @@ CREATE TABLE `cart` (
   `CustomerID` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `ProductID` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `Count` int(10) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -82,7 +82,7 @@ CREATE TABLE `customer` (
   `Role` varchar(8) NOT NULL DEFAULT 'customer',
   `Address` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `Birthday` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `customer`
@@ -108,7 +108,7 @@ CREATE TABLE `feedback` (
   `ProductID` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `Content` varchar(5000) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `Start_date` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -120,37 +120,59 @@ CREATE TABLE `image` (
   `Id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `Content` mediumblob NOT NULL,
   `ProductID` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `image`
 --
 
 INSERT INTO `image` (`Id`, `Content`, `ProductID`) VALUES
-('0bff9c13-9bca-4c60-9fac-b44a4b070d47', 0x443a58414d5050096d70706870333330332e746d70, '73fe9634-5c32-4571-a1c6-ca3d7ce5ee4e'),
-('12df0186-1886-4b77-9a50-7abcacaaca90', 0x443a58414d5050096d70706870434336322e746d70, '82306123-643e-400e-bfdc-d8b6b7848abf'),
-('141e8966-57ba-4011-8a77-58e591a24b0b', 0x443a58414d5050096d70706870393839332e746d70, 'cfd97690-9690-4ce0-bee2-f2f933e78f2a'),
-('19c06a82-be3f-4f72-b037-3e9578e6db54', 0x443a58414d5050096d70706870363531422e746d70, '68819863-7f7a-4493-a808-4b657e7da961'),
-('1ea6be97-a10d-4ad5-8cdf-7a317ec134b4', 0x443a58414d5050096d70706870453132342e746d70, '82306123-643e-400e-bfdc-d8b6b7848abf'),
-('24f0f6fe-9a0e-4aad-9bd0-c1da49f98fcf', 0x443a58414d5050096d70706870423543432e746d70, '82306123-643e-400e-bfdc-d8b6b7848abf'),
-('2c50f41c-52a0-4651-854e-9f622498a4cb', 0x443a58414d5050096d70706870334333372e746d70, '9e8f2fca-5d7d-4556-8b33-4c39ff272ff7'),
-('32375cb9-c591-4077-9972-b956007545b5', 0x443a58414d5050096d70706870313742412e746d70, '73fe9634-5c32-4571-a1c6-ca3d7ce5ee4e'),
-('4a40c368-c0bf-4f0e-b904-b578adc89657', 0x443a58414d5050096d70706870394344372e746d70, '001cd400-b52a-46b2-8993-050639d5f7c4'),
-('77e286eb-48fe-4da0-898d-76db56f106c0', 0x443a58414d5050096d70706870344334392e746d70, '73fe9634-5c32-4571-a1c6-ca3d7ce5ee4e'),
-('7a507bb3-046e-4582-9787-ee742d21065c', 0x443a58414d5050096d70706870443041392e746d70, '2a385955-39ea-44a3-be16-9be55e4540de'),
-('7c1030da-48e8-4da3-a5f4-26f230cbaeaf', 0x443a58414d5050096d70706870344546352e746d70, '9e8f2fca-5d7d-4556-8b33-4c39ff272ff7'),
-('7fc4a0fa-07e9-43e6-a7df-86dd1d2d8534', 0x443a58414d5050096d70706870323231352e746d70, '5e1848c8-0348-47a6-bef6-e164f670ab12'),
-('84273b29-05c1-4c74-ac90-3b5423a94bd9', 0x443a58414d5050096d70706870423439382e746d70, 'cfd97690-9690-4ce0-bee2-f2f933e78f2a'),
-('8735debd-3af0-491c-8cba-0d9dc0982683', 0x443a58414d5050096d70706870374138382e746d70, '68819863-7f7a-4493-a808-4b657e7da961'),
-('8c46faf9-0702-4785-887d-08914b2b1d84', 0x443a58414d5050096d70706870394232462e746d70, '2a385955-39ea-44a3-be16-9be55e4540de'),
-('b1b3c7d9-adf7-4a01-b94f-f30f12748af5', 0x443a58414d5050096d70706870394438332e746d70, '68819863-7f7a-4493-a808-4b657e7da961'),
-('bcff31d1-18c4-455c-9e96-d9b1887eebe3', 0x443a58414d5050096d70706870383137302e746d70, 'cfd97690-9690-4ce0-bee2-f2f933e78f2a'),
-('bf00cf46-259b-4882-8c77-88ca52d1e8c7', 0x443a58414d5050096d70706870423943342e746d70, '2a385955-39ea-44a3-be16-9be55e4540de'),
-('c0553c04-24a1-4248-8fc5-a7fcfb5400dc', 0x443a58414d5050096d70706870353338382e746d70, '5e1848c8-0348-47a6-bef6-e164f670ab12'),
-('ccb29707-4bfe-4d60-a2c9-b2241d0ba249', 0x443a58414d5050096d70706870334137312e746d70, '5e1848c8-0348-47a6-bef6-e164f670ab12'),
-('e20013bf-746b-48df-b9b6-f3d6849f2e78', 0x443a58414d5050096d70706870423346412e746d70, '001cd400-b52a-46b2-8993-050639d5f7c4'),
-('e8cfebf1-b6d6-4182-adf5-644569868acf', 0x443a58414d5050096d70706870323131442e746d70, '9e8f2fca-5d7d-4556-8b33-4c39ff272ff7'),
-('efa2fa54-8eff-4afa-bf94-a9fa6bb70aef', 0x443a58414d5050096d70706870383635312e746d70, '001cd400-b52a-46b2-8993-050639d5f7c4');
+('06944a33-9c78-47da-88ba-335249234d7b', 0x433a78616d7070096d70706870453539392e746d70, '4b649904-35ed-4e52-a3b7-eca925837959'),
+('0982e224-c5d6-4f23-b94a-7f66233cd4ab', 0x433a78616d7070096d70706870424437452e746d70, '4459e863-fd78-4ded-b5a0-28fa9580ce37'),
+('0c9ac50c-a9b2-4b62-ae11-f0bb6f5b1cd3', 0x433a78616d7070096d70706870414331302e746d70, '4a125cf4-c3a8-4dc8-bde3-2a3473f98681'),
+('18741a51-1554-4d88-9760-dd7b3278bfb2', 0x433a78616d7070096d70706870313443462e746d70, 'ba09f81e-e926-49bb-8901-20df5e157626'),
+('29dc5ba5-14ba-4f40-96bd-fa3756ceaa1f', 0x433a78616d7070096d70706870384537442e746d70, '4459e863-fd78-4ded-b5a0-28fa9580ce37'),
+('33d0f864-659b-4c0e-b351-b798b999acda', 0x433a78616d7070096d70706870464436372e746d70, '4b649904-35ed-4e52-a3b7-eca925837959'),
+('3bb04be2-f208-4c8b-a216-79408cfb78de', 0x433a78616d7070096d70706870353345372e746d70, 'ba09f81e-e926-49bb-8901-20df5e157626'),
+('3eeb05f4-b778-4cfc-8b3d-190f2173f633', 0x433a78616d7070096d70706870464536452e746d70, '4459e863-fd78-4ded-b5a0-28fa9580ce37'),
+('40e97fc5-c55f-433b-b6b7-7a0d2ab57c75', 0x433a78616d7070096d70706870333436432e746d70, 'f9f311c5-62f8-41e1-a5d6-defa0abd634b'),
+('4cac795a-13ad-49b8-8c81-10e1a7335a76', 0x433a78616d7070096d70706870453435412e746d70, '80333cd7-ae8b-4fed-957d-62939c4d3d5f'),
+('53bb20ae-2969-4f3f-998a-dcb3eba4bcaa', 0x433a78616d7070096d70706870444236462e746d70, '4a125cf4-c3a8-4dc8-bde3-2a3473f98681'),
+('5af88464-f684-421c-8825-c28f5a117ea7', 0x433a78616d7070096d70706870453634322e746d70, '4459e863-fd78-4ded-b5a0-28fa9580ce37'),
+('5cc2ab71-4f76-4e7d-b8ff-0d07e1f22792', 0x433a78616d7070096d707068703739422e746d70, 'e1a38dd1-90ec-45ad-bedb-0eb5ab030b9d'),
+('5ece174c-7a31-4f2d-b62e-daf3ea8dd4f5', 0x433a78616d7070096d707068703242432e746d70, '5021a009-4f4c-479f-a97e-87425b1a85e2'),
+('61795f4d-5e78-4faa-a34f-a0f314a0449c', 0x433a78616d7070096d70706870454231352e746d70, '420f1322-8d35-4290-b909-6b1f7abc739f'),
+('69716bb4-1607-4cbc-a669-df4b9fe7da6b', 0x433a78616d7070096d70706870413832302e746d70, '4459e863-fd78-4ded-b5a0-28fa9580ce37'),
+('6a767e6d-540a-4569-bd55-1e57f9e08019', 0x433a78616d7070096d70706870313333302e746d70, '4459e863-fd78-4ded-b5a0-28fa9580ce37'),
+('6c3a5baa-165d-492d-811d-b22f5f54c5e4', 0x433a78616d7070096d70706870413143452e746d70, 'f9f311c5-62f8-41e1-a5d6-defa0abd634b'),
+('700d9a10-8f3d-4a09-b548-4b46867bada5', 0x433a78616d7070096d707068704432392e746d70, 'd28c6612-0006-47f2-92b0-3b4856822323'),
+('73e0f0f5-b387-4dc7-aac1-488cc05bb210', 0x433a78616d7070096d70706870413334462e746d70, '8dafd7d6-4bfa-4085-a0f7-e4c37e8ff3b7'),
+('77b54fbd-7de6-411d-bae3-6044806154fa', 0x433a78616d7070096d70706870373346392e746d70, 'b89e62d5-b4f1-4f14-bbca-d88efc58447a'),
+('87da7aed-00ca-4d51-a048-84fbaaf2dc13', 0x433a78616d7070096d70706870453131372e746d70, 'e1a38dd1-90ec-45ad-bedb-0eb5ab030b9d'),
+('8d5d2f69-aeb7-4a05-8a75-d0308d8d889c', 0x433a78616d7070096d70706870333242352e746d70, 'd28c6612-0006-47f2-92b0-3b4856822323'),
+('933a8bf0-f226-4b22-922d-4df395996963', 0x433a78616d7070096d70706870453544442e746d70, '5021a009-4f4c-479f-a97e-87425b1a85e2'),
+('93808c2f-65df-4675-9f58-5c7327d60011', 0x433a78616d7070096d70706870443430442e746d70, 'b89e62d5-b4f1-4f14-bbca-d88efc58447a'),
+('97be3b53-dffa-4218-87e9-910b9d7903ea', 0x433a78616d7070096d70706870424632432e746d70, '4a125cf4-c3a8-4dc8-bde3-2a3473f98681'),
+('9ef6295c-fff2-44f9-87b2-4a6121e36d57', 0x433a78616d7070096d70706870433836422e746d70, '4b649904-35ed-4e52-a3b7-eca925837959'),
+('9f4dd241-3e0a-4210-b3c1-b8f8753b3054', 0x433a78616d7070096d70706870333441452e746d70, 'ba09f81e-e926-49bb-8901-20df5e157626'),
+('a1fb1178-60f0-46fc-9841-d02604cb8d3a', 0x433a78616d7070096d70706870323445442e746d70, 'ba09f81e-e926-49bb-8901-20df5e157626'),
+('a6323b8a-c092-4295-a345-6324f7f48db7', 0x433a78616d7070096d70706870314543312e746d70, '5021a009-4f4c-479f-a97e-87425b1a85e2'),
+('a7091c6c-594e-482a-b1ae-25c05dbcc1f9', 0x433a78616d7070096d70706870453737432e746d70, '65edc9ef-6773-45df-8a0f-2949850ba645'),
+('a8a8395f-c8d8-4b1f-bb66-80701bd86556', 0x433a78616d7070096d70706870363534442e746d70, 'ba09f81e-e926-49bb-8901-20df5e157626'),
+('a926f688-241d-4082-be7d-302248f043ef', 0x433a78616d7070096d70706870314538302e746d70, 'd28c6612-0006-47f2-92b0-3b4856822323'),
+('b0c6748c-a29f-447e-af49-9c3b143c9cb6', 0x433a78616d7070096d70706870324338392e746d70, 'e1a38dd1-90ec-45ad-bedb-0eb5ab030b9d'),
+('b73c266c-0367-48b9-a808-d722a442a76a', 0x433a78616d7070096d70706870353446352e746d70, 'f9f311c5-62f8-41e1-a5d6-defa0abd634b'),
+('b97a9caa-bf7b-4ad0-b800-195e85e72209', 0x433a78616d7070096d707068704132372e746d70, '420f1322-8d35-4290-b909-6b1f7abc739f'),
+('d647f03a-e72a-401d-a6ad-d53532ed7fc2', 0x433a78616d7070096d707068703832462e746d70, '80333cd7-ae8b-4fed-957d-62939c4d3d5f'),
+('d9510907-1a07-49d0-8914-3c3306fbe232', 0x433a78616d7070096d70706870323343422e746d70, '420f1322-8d35-4290-b909-6b1f7abc739f'),
+('da17539c-054b-4fb3-87f6-065a0fe35d7a', 0x433a78616d7070096d707068703637452e746d70, '65edc9ef-6773-45df-8a0f-2949850ba645'),
+('da7c9bdb-4410-441c-b044-a3e6f410f084', 0x433a78616d7070096d70706870373836392e746d70, 'ba09f81e-e926-49bb-8901-20df5e157626'),
+('dc2f4349-b77e-4380-8afa-f919c04415d0', 0x433a78616d7070096d70706870354534352e746d70, '8dafd7d6-4bfa-4085-a0f7-e4c37e8ff3b7'),
+('de3cfda0-5e0d-4d3f-bec7-d2376fa10b0d', 0x433a78616d7070096d70706870383335322e746d70, '8dafd7d6-4bfa-4085-a0f7-e4c37e8ff3b7'),
+('e0f885ce-92f3-4079-853c-683215e0bb84', 0x433a78616d7070096d70706870413346332e746d70, 'b89e62d5-b4f1-4f14-bbca-d88efc58447a'),
+('e32e838f-a19d-4047-a758-62c2b2b8bd7c', 0x433a78616d7070096d70706870314437322e746d70, '65edc9ef-6773-45df-8a0f-2949850ba645'),
+('f3a822c4-155d-4db0-b178-4627ac0ca417', 0x433a78616d7070096d70706870313437462e746d70, 'f9f311c5-62f8-41e1-a5d6-defa0abd634b'),
+('f5171c4e-0609-4abd-91dd-8c590749d5b8', 0x433a78616d7070096d70706870434139372e746d70, '80333cd7-ae8b-4fed-957d-62939c4d3d5f');
 
 -- --------------------------------------------------------
 
@@ -164,7 +186,7 @@ CREATE TABLE `news` (
   `Start_date` datetime DEFAULT NULL,
   `End_date` datetime DEFAULT NULL,
   `Content` varchar(5000) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -185,26 +207,27 @@ CREATE TABLE `product` (
   `Album` varchar(1000) DEFAULT NULL,
   `Model` varchar(1000) DEFAULT NULL,
   `Connect` varchar(1000) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `product`
 --
 
 INSERT INTO `product` (`Id`, `Is_active`, `Name`, `Type`, `Price`, `Quantity`, `Description`, `Material`, `Style`, `Album`, `Model`, `Connect`) VALUES
-('001cd400-b52a-46b2-8993-050639d5f7c4', 1, 'Đầm vàng', 'Đầm', '600000.00000', '20', 'Mặc mát, thích hợp vào mùa hè', NULL, NULL, NULL, NULL, NULL),
-('2a385955-39ea-44a3-be16-9be55e4540de', 1, 'Sơ mi', 'Áo', '400000.00000', '20', 'Mặc mát, thích hợp vào mùa hè', NULL, NULL, NULL, NULL, NULL),
-('5e1848c8-0348-47a6-bef6-e164f670ab12', 1, 'Đầm hồng', 'Đầm', '450000.00000', '20', 'Mặc mát, thích hợp vào mùa hè', NULL, NULL, NULL, NULL, NULL),
-('68819863-7f7a-4493-a808-4b657e7da961', 1, 'Áo vest', 'Áo', '1200000.00000', '20', 'Mặc mát, thích hợp vào mùa hè', NULL, NULL, NULL, NULL, NULL),
-('73fe9634-5c32-4571-a1c6-ca3d7ce5ee4e', 1, 'Áo dài', 'Áo', '1200000.00000', '20', 'Mặc mát, thích hợp vào mùa hè', NULL, NULL, NULL, NULL, NULL),
-('749dee01-e383-11ed-901c-089798e3fef0', 1, 'Áo blue', 'Áo', '120000.00000', '20', 'Mặc mát, thích hợp vào mùa hè', NULL, NULL, NULL, NULL, NULL),
-('81d2876a-e383-11ed-901c-089798e3fef0', 1, 'Quần dài', 'Quần', '12000.00000', '20', 'Mặc mát, thích hợp vào mùa hè', NULL, NULL, NULL, NULL, NULL),
-('82306123-643e-400e-bfdc-d8b6b7848abf', 1, 'Áo len', 'Áo', '1200000.00000', '20', 'Mặc mát, thích hợp vào mùa hè', NULL, NULL, NULL, NULL, NULL),
-('8be77bbf-e383-11ed-901c-089798e3fef0', 1, 'Quần tây', 'Quần', '120000.00000', '20', 'Mặc mát, thích hợp vào mùa hè', NULL, NULL, NULL, NULL, NULL),
-('9c017aad-e383-11ed-901c-089798e3fef0', 1, 'Áo phông', 'Áo', '120000.00000', '20', 'Mặc mát, thích hợp vào mùa hè', NULL, NULL, NULL, NULL, NULL),
-('9e8f2fca-5d7d-4556-8b33-4c39ff272ff7', 1, 'Quần đen', 'Quần', '300000.00000', '20', 'Mặc mát, thích hợp vào mùa hè', NULL, NULL, NULL, NULL, NULL),
-('b5c29f7b-6243-4d0d-8f1e-17b9dcc23cb9', 1, 'Quần short', 'Quần', '360000.00000', '20', 'Mặc mát, thích hợp vào mùa hè', '', '', '', '', ''),
-('cfd97690-9690-4ce0-bee2-f2f933e78f2a', 1, 'Quần kaki', 'Quần', '360000.00000', '20', 'Mặc mát, thích hợp vào mùa hè', NULL, NULL, NULL, NULL, NULL);
+('420f1322-8d35-4290-b909-6b1f7abc739f', 1, 'SƠ MI CỔ NƠ SM18212', 'Áo Somi', '799000.00000', '160', '', 'Vải tổng hợp cao cấp', 'Áo sơ mi thiết kế tay lỡ, tone màu hồng nhat, cổ phối nơ thắt cách điệu', 'NEM NEW', 'mặc sản phẩm size 2', 'chân váy Z08302'),
+('4459e863-fd78-4ded-b5a0-28fa9580ce37', 1, 'QUẦN CÔNG SỞ Q43242', 'Quần Dài', '429000.00000', '70', '', 'Vải tổng hợp cao cấp', 'Quần dài thiết kế cạp cao, ống đứng, tone màu đen trơn, xếp li phía trước', 'NEM NEW', 'mặc sản phẩm size 2', 'áo SM42552'),
+('4a125cf4-c3a8-4dc8-bde3-2a3473f98681', 1, 'SƠ MI OVERSIZE SM19562', 'Áo Somi', '999000.00000', '160', 'Lưu ý: sản phẩm không kèm đai', 'Vải tổng hợp cao cấp', 'Ao sơ mi thiết kế dáng rộng, cổ bẻ, tone màu xanh ', 'NEM NEW', 'mặc sản phẩm size 2', 'quần Q67052'),
+('4b649904-35ed-4e52-a3b7-eca925837959', 1, 'CHÂN VÁY BÚT CHÌ Z189022', 'Chân váy', '799000.00000', '20', '', 'Vải tổng hợp cao cấp', '​chân váy bút chì cạp cao,vạt chéo, tone màu đen trơn', 'NEM NEW', 'mặc sản phẩm size 2', 'Áo SM06932'),
+('5021a009-4f4c-479f-a97e-87425b1a85e2', 1, 'CHÂN VÁY REN XẾP LI Z19322', 'Chân váy', '899000.00000', '20', 'Mặc mát, thích hợp vào mùa hè', 'Vải ren cao cấp', '​chân váy midi xếp li dài qua gối,  tone màu xanh đậm', 'NEM NEW', 'mặc sản phẩm size 2', 'Áo SM19312'),
+('65edc9ef-6773-45df-8a0f-2949850ba645', 1, 'QUẦN SHORT XẺ GẤU Q20572', 'Quần Short', '599000.00000', '80', '', 'Vải tổng hợp cao cấp', 'Quần short thiết kế cạp cao, cạp cách điệu, tone màu vàng trơn', 'NEM NEW', 'mặc sản phẩm size 2', 'áo TS60012'),
+('80333cd7-ae8b-4fed-957d-62939c4d3d5f', 1, 'BỘ MẶC NHÀ HOA XANH HW03652', 'Set bộ', '599000.00000', '60', '', 'Vải tổng hợp cao cấp', 'Bộ mặc nhà bao gồm áo không tay và quần short, kết hợp họa tiết hoa xanh', 'NEM NEW', 'mặc sản phẩm size 2', ''),
+('8dafd7d6-4bfa-4085-a0f7-e4c37e8ff3b7', 1, 'JUMPSUIT CHẤM BI DÁNG DÀI J04882', 'Jumpsuit', '1399000.00000', '60', '', 'Vải tổng hợp cao cấp', 'Jumpsuit thiết kế ống rộng, cổ bẻ, tone màu đen kết hợp họa tiết chấm bi', 'NEM NEW', 'mặc sản phẩm size 2', ''),
+('b89e62d5-b4f1-4f14-bbca-d88efc58447a', 1, 'ĐẦM REN TAY RỦ D19502', 'Đầm', '1599000.00000', '20', 'Lưu ý: sản phẩm không kèm đai', 'vải ren cao cấp', 'đầm thiết kế dáng chữ A dài qua gối, cổ tròn,tay rủ, tone màu nâu be trơn', 'NEM NEW', 'mặc sản phẩm size 2', ''),
+('ba09f81e-e926-49bb-8901-20df5e157626', 1, 'ÁO DÀI HỌA TIẾT AD15902', 'Áo Dài', '1499000.00000', '100', '', 'Vải tổng hợp cao cấp', 'Áo dài thiết kế dài tay, tone nền màu nâu kết hợp họa tiết in nổi bật', 'NEM NEW', 'mặc sản phẩm size 2', 'quần Q17292'),
+('d28c6612-0006-47f2-92b0-3b4856822323', 1, 'ĐẦM ĐEN TAY BỒNG D19162', 'Đầm', '1399000.00000', '20', 'Lưu ý: sản phẩm không kèm đai', 'Vải tổng hợp cao cấp', 'Đầm thiết kế dáng chữ A dài qua gối, tone màu đen trơn', 'NEM', 'mặc sản phẩm size 2', ''),
+('e1a38dd1-90ec-45ad-bedb-0eb5ab030b9d', 1, 'SƠ MI REN SM00292', 'Áo Somi', '799000.00000', '160', 'Lưu ý: sản phẩm không kèm đai', 'vải ren cao cấp', 'Áo thiết kế vai bồng, cổ tròn, tone màu đen trơn ', 'NEM', 'mặc sản phẩm size 2', 'quần Q00302'),
+('f1d6cc6d-becb-4f18-8ccf-398a70ee9d2d', 1, 'ÁO DÀI NHUNG ĐÍNH HOA 3D AD12852', 'Áo Dài', '449700.00000', '50', '', 'Vải nhung cao cấp', 'Áo dài thiết kế tone màu đỏ đô, phần cổ đính voan, đính hoa 3D bản to', 'NEM NEW', 'mặc sản phẩm size 2', 'quần Q12862'),
+('f9f311c5-62f8-41e1-a5d6-defa0abd634b', 1, 'QUẦN JEANS CẠP PHỐI CHUN Q67012', 'Quần Jeans', '599000.00000', '80', 'Phù hợp đi làm, đi sự kiện, hay đi dạo phố, tạo vẻ trẻ trung, hiện đại cho người mặc.', 'Vải jeans cao cấp', 'Quần jeans thiết kế dáng ống đứng, độ dài trên mắt cá chân, cạp phối chun', 'NEM NEW', 'mặc sản phẩm size 2', 'áo phông TS60042');
 
 -- --------------------------------------------------------
 
@@ -218,7 +241,7 @@ CREATE TABLE `voucher` (
   `Percent` decimal(5,2) NOT NULL DEFAULT 0.00,
   `Start_date` datetime NOT NULL,
   `End_date` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Indexes for dumped tables
