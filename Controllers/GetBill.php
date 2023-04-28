@@ -26,14 +26,22 @@ try {
     $database = $db->query("SELECT Id, Status, Total, Time, Pay_method, Note FROM bill WHERE CustomerID = '" . $data->customerID . "' ORDER BY Time DESC");
     $bills = $database->fetchAll(PDO::FETCH_ASSOC);
 
+    for ($m=0; $m < count($bills); $m++) { 
+        $utc_datetime = new DateTime($bills[$m]['Time'], new DateTimeZone('UTC'));
+        $local_timezone = new DateTimeZone('Asia/Ho_Chi_Minh');
+        $local_datetime = $utc_datetime->setTimezone($local_timezone);
+    
+        $bills[$m]['Time'] = $local_datetime->format('Y-m-d H:m:s');
+    }
+
     if ($bills == true) {
         for ($i = 0; $i < count($bills); $i++) {
             $detail = $db->query("SELECT p.Id, p.Album, p.Name, p.Type, b.Count, b.Price_item, b.Size, b.Color, b.Rate
                                 FROM bill_detail AS b, product AS p
                                 WHERE b.ProductID = p.Id AND b.BillID = '" . $bills[$i]['Id'] . "'");
             $bills[$i]['details'] = $detail->fetchAll(PDO::FETCH_ASSOC);
-            
-            for ($j=0; $j < count($bills[$i]['details']); $j++) { 
+
+            for ($j = 0; $j < count($bills[$i]['details']); $j++) {
                 $image = $db->query("SELECT Content FROM image WHERE Main = 1 AND ProductID = '" . $bills[$i]['details'][$j]['Id'] . "'");
                 $bills[$i]['details'][$j]['Image'] = $image->fetchAll(PDO::FETCH_ASSOC)[0]['Content'];
             }
