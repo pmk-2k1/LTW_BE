@@ -25,7 +25,7 @@ try {
     }
     
     $sql = "UPDATE customer SET Is_active = '$data->isActive', Name = '$data->name', Phone_number = '$data->phoneNumber', Email = '$data->email', Gender = '$data->gender',
-        Role = '$data->role', Address = '$data->address', Birthday = '$data->birthday'
+        Role = '$data->role', Address = '$data->address'
         WHERE Id = '$data->id'";
 
     $db->query($sql);
