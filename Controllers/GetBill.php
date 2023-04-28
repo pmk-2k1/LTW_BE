@@ -31,7 +31,7 @@ try {
         $local_timezone = new DateTimeZone('Asia/Ho_Chi_Minh');
         $local_datetime = $utc_datetime->setTimezone($local_timezone);
     
-        $bills[$m]['Time'] = $local_datetime->format('Y-m-d H:m:s');
+        $bills[$m]['Time'] = $local_datetime->format('H:m:s d-m-Y');
     }
 
     if ($bills == true) {
