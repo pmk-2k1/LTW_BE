@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 4.8.4
 -- https://www.phpmyadmin.net/
 --
--- Host: 127.0.0.1
--- Generation Time: Apr 28, 2023 at 08:05 AM
--- Server version: 10.4.24-MariaDB
--- PHP Version: 7.4.29
+-- Host: bnqnkt6zizg4yarlnt9r-mysql.services.clever-cloud.com:3306
+-- Generation Time: Apr 28, 2023 at 04:23 PM
+-- Server version: 8.0.22-13
+-- PHP Version: 7.2.34
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -18,7 +19,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `clothing_store`
+-- Database: `bnqnkt6zizg4yarlnt9r`
 --
 
 -- --------------------------------------------------------
@@ -29,19 +30,26 @@ SET time_zone = "+00:00";
 
 CREATE TABLE `bill` (
   `Id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `Status` tinyint(1) NOT NULL DEFAULT 1,
-  `Total` decimal(20,5) NOT NULL DEFAULT 0.00000,
+  `Status` tinyint(1) NOT NULL DEFAULT '1',
+  `Total` decimal(20,5) NOT NULL DEFAULT '0.00000',
   `Time` datetime NOT NULL,
-  `Pay_method` varchar(100) NOT NULL DEFAULT 'Momo',
+  `Pay_method` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci NOT NULL DEFAULT 'Offline',
   `Note` varchar(2000) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `CustomerID` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `bill`
 --
 
 INSERT INTO `bill` (`Id`, `Status`, `Total`, `Time`, `Pay_method`, `Note`, `CustomerID`) VALUES
+('27040b10-f773-4136-8710-ae7ddff7800b', 0, '6990000.00000', '2023-04-28 06:38:02', 'Offline', '', 'fbb9e56e-cd26-42aa-a07d-5b3cb3e88815'),
+('48a1f59e-7cf8-4bb2-b783-24fbd59969ef', 1, '599000.00000', '2023-04-28 07:00:54', 'Tiền mặt', '208/18/55/42 đường 138, phường Tân Phú, quận 9, HCM', '52bb64cc-c31f-4749-a548-8db0a555f980'),
+('5d5a69b9-6b35-418d-a6a1-6168f249e22f', 1, '3795000.00000', '2023-04-28 07:01:38', 'ZaloPay', '208/18/55/42 đường 138, phường Tân Phú, quận 9, HCM', '52bb64cc-c31f-4749-a548-8db0a555f980'),
+('6dc61900-5a95-4721-9d2b-cf7c3300c312', 1, '1797000.00000', '2023-04-28 08:00:31', 'Tiền mặt', '208/18/55/42 đường 138, phường Tân Phú, quận 9, HCM', '52bb64cc-c31f-4749-a548-8db0a555f980'),
+('70e29679-278f-4cfd-a7b6-0551f8d5a3da', 1, '6990000.00000', '2023-04-28 06:39:04', 'Offline', '', 'fbb9e56e-cd26-42aa-a07d-5b3cb3e88815'),
+('c0d52557-3725-4d1a-964a-e091a74f7675', 1, '3397000.00000', '2023-04-28 07:37:17', 'Phương thức thanh toán', 'Cam Lâm', '0adad6da-6ca4-4090-bd45-eda1f08baab8'),
+('ec149abb-a23e-4991-b5e2-b00c3060d192', 1, '1399000.00000', '2023-04-28 07:30:34', 'Tiền mặt', '208/18/55/42 đường 138, phường Tân Phú, quận 9, HCM', 'fdc751d1-fbcf-44c9-b961-7e25c057aaf1'),
 ('fd7be617-3767-465c-a737-f45248777ef2', 0, '2197000.00000', '2023-04-28 04:51:38', 'Offline', '', 'fbb9e56e-cd26-42aa-a07d-5b3cb3e88815');
 
 -- --------------------------------------------------------
@@ -54,20 +62,31 @@ CREATE TABLE `bill_detail` (
   `Id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `BillID` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `ProductID` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `Count` int(10) UNSIGNED NOT NULL DEFAULT 1,
-  `Price_item` decimal(20,5) NOT NULL DEFAULT 0.00000,
+  `Count` int UNSIGNED NOT NULL DEFAULT '1',
+  `Price_item` decimal(20,5) NOT NULL DEFAULT '0.00000',
   `Size` varchar(10) NOT NULL,
   `Color` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
-  `Rate` int(1) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `Rate` int NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `bill_detail`
 --
 
 INSERT INTO `bill_detail` (`Id`, `BillID`, `ProductID`, `Count`, `Price_item`, `Size`, `Color`, `Rate`) VALUES
+('073b7056-ac89-46dd-9f8b-100042f767b5', 'c0d52557-3725-4d1a-964a-e091a74f7675', '4090ac8e-d1b1-4479-836e-09c63eb822d2', 2, '1399000.00000', 'Size 4', 'Vàng', 1),
+('222f03b0-5588-4b6a-96a1-4ed9607b7f67', '70e29679-278f-4cfd-a7b6-0551f8d5a3da', '420f1322-8d35-4290-b909-6b1f7abc739f', 5, '799000.00000', '3', 'yellow', 4),
+('3f0c8b55-c8f1-43fc-85f0-5d1abc839e89', '27040b10-f773-4136-8710-ae7ddff7800b', '219971e4-a0c4-4699-bbed-5ce8ba211175', 5, '599000.00000', '2', 'pink', 2),
+('43becb7d-a3f1-4aaf-868a-7aa666b7152b', '6dc61900-5a95-4721-9d2b-cf7c3300c312', '219971e4-a0c4-4699-bbed-5ce8ba211175', 3, '599000.00000', 'Size 4', 'Vàng', 1),
+('443964ec-a87a-4928-8608-939131aabb98', '5d5a69b9-6b35-418d-a6a1-6168f249e22f', '420f1322-8d35-4290-b909-6b1f7abc739f', 4, '799000.00000', 'Size 4', 'Vàng', 1),
 ('51145805-b4b0-45e3-9526-c765a270090a', 'fd7be617-3767-465c-a737-f45248777ef2', '219971e4-a0c4-4699-bbed-5ce8ba211175', 1, '599000.00000', '2', 'pink', 2),
-('9b3fc02a-d529-4261-8207-618b92396d0a', 'fd7be617-3767-465c-a737-f45248777ef2', '420f1322-8d35-4290-b909-6b1f7abc739f', 2, '799000.00000', '3', 'yellow', 4);
+('58bac53f-3996-44f7-b53c-2bfbb4225f97', 'c0d52557-3725-4d1a-964a-e091a74f7675', '219971e4-a0c4-4699-bbed-5ce8ba211175', 1, '599000.00000', 'Size 4', 'Vàng', 1),
+('86a36ea7-99cd-4a9d-a39b-94b618675678', '27040b10-f773-4136-8710-ae7ddff7800b', '420f1322-8d35-4290-b909-6b1f7abc739f', 5, '799000.00000', '3', 'yellow', 4),
+('913c3d6f-0b9f-4778-adfd-194bb319af16', 'ec149abb-a23e-4991-b5e2-b00c3060d192', '4090ac8e-d1b1-4479-836e-09c63eb822d2', 1, '1399000.00000', 'Size 4', 'Vàng', 1),
+('9b3fc02a-d529-4261-8207-618b92396d0a', 'fd7be617-3767-465c-a737-f45248777ef2', '420f1322-8d35-4290-b909-6b1f7abc739f', 2, '799000.00000', '3', 'yellow', 4),
+('b67e06c4-a5bb-440e-94c2-b0490abf2148', '48a1f59e-7cf8-4bb2-b783-24fbd59969ef', '219971e4-a0c4-4699-bbed-5ce8ba211175', 1, '599000.00000', 'Size 4', 'Vàng', 1),
+('ebc6c908-e4ad-4994-ab65-36e2214ee5b1', '70e29679-278f-4cfd-a7b6-0551f8d5a3da', '219971e4-a0c4-4699-bbed-5ce8ba211175', 5, '599000.00000', '2', 'pink', 2),
+('ede8d3ab-ba84-4819-b159-40374d2167f5', '5d5a69b9-6b35-418d-a6a1-6168f249e22f', '219971e4-a0c4-4699-bbed-5ce8ba211175', 1, '599000.00000', 'Size 8', 'Hồng', 1);
 
 -- --------------------------------------------------------
 
@@ -78,8 +97,8 @@ INSERT INTO `bill_detail` (`Id`, `BillID`, `ProductID`, `Count`, `Price_item`, `
 CREATE TABLE `cart` (
   `CustomerID` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `ProductID` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `Count` int(10) NOT NULL DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `Count` int NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -89,29 +108,34 @@ CREATE TABLE `cart` (
 
 CREATE TABLE `customer` (
   `Id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `Is_active` tinyint(1) NOT NULL DEFAULT 1,
+  `Is_active` tinyint(1) NOT NULL DEFAULT '1',
   `Name` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `Phone_number` varchar(12) NOT NULL,
-  `Email` varchar(30) NOT NULL,
+  `Email` varchar(30) CHARACTER SET utf8mb4 COLLATE utf8mb4_0900_ai_ci DEFAULT NULL,
   `Password` char(32) NOT NULL,
   `Gender` varchar(6) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL DEFAULT 'male',
   `Role` varchar(8) NOT NULL DEFAULT 'customer',
-  `Address` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
-  `Birthday` date DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+  `Address` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `customer`
 --
 
-INSERT INTO `customer` (`Id`, `Is_active`, `Name`, `Phone_number`, `Email`, `Password`, `Gender`, `Role`, `Address`, `Birthday`) VALUES
-('1e70288b-d156-11ed-a5a2-089798e3fef0', 1, 'Hoàng Cao Chí', '0912345678', 'fhdsjkalfsad@gmail.com', 'a@D12345678901234567890123456789', 'male', 'customer', NULL, NULL),
-('31100e15-7931-423d-be78-a10ab488641a', 1, 'Nguyen Van A', '0123456984', '', 'e10adc3949ba59abbe56e057f20f883e', 'male', 'customer', '', NULL),
-('AFFE02B6-E596-CD3D-E142-9E741E22477B', 1, 'Trần Phàm', '0987654123', 'tran@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'male', 'manager', '', '0000-00-00'),
-('b4b97558-8bf3-425d-a26f-bf6dd5a2bb13', 1, 'Nguyen Van A', '0123456987', '', '25f9e794323b453885f5181f1b624d0b', 'male', 'customer', '', NULL),
-('c1323099-cc4d-451f-95be-46a68c9d1bfb', 1, 'Nguyen Van A', '0123456985', '', 'e10adc3949ba59abbe56e057f20f883e', 'male', 'customer', '', NULL),
-('cae1da1c-1ba0-4670-875f-84fd67eed92b', 1, 'Nguyen Van A', '01234569876', '', 'e10adc3949ba59abbe56e057f20f883e', 'male', 'customer', '', NULL),
-('fbb9e56e-cd26-42aa-a07d-5b3cb3e88815', 1, 'Nguyen B', '0123456135', 'nguyenb@gmail.com', '5baf03061fefc117e70984026e543e04', 'male', 'manager', '', '0000-00-00');
+INSERT INTO `customer` (`Id`, `Is_active`, `Name`, `Phone_number`, `Email`, `Password`, `Gender`, `Role`, `Address`) VALUES
+('0adad6da-6ca4-4090-bd45-eda1f08baab8', 1, 'Phùng Khánh', '0979259173', NULL, '96e79218965eb72c92a549dd5a330112', 'male', 'customer', 'Cam Lâm'),
+('1bb8f2ab-2417-4545-87c6-5918c2361d32', 1, 'Lộc 2k5', '09765674253', NULL, '96e79218965eb72c92a549dd5a330112', 'male', 'customer', 'KTX khu A'),
+('1e70288b-d156-11ed-a5a2-089798e3fef0', 1, 'Hoàng Cao Chí', '0912345678', 'fhdsjkalfsad@gmail.com', 'a@D12345678901234567890123456789', 'male', 'customer', NULL),
+('31100e15-7931-423d-be78-a10ab488641a', 1, 'Nguyen Van A', '0123456984', '', 'e10adc3949ba59abbe56e057f20f883e', 'male', 'customer', ''),
+('52bb64cc-c31f-4749-a548-8db0a555f980', 1, 'Nguyễn Tiến Dũng', '038515455đ', '', '96e79218965eb72c92a549dd5a330112', 'male', 'customer', '208/18/55/42 đường 138, phường Tân Phú, quận 9, HCM'),
+('9a3eac20-1626-4197-9ced-724413db1ae5', 1, 'Tiến Dũng', '0385154556', NULL, '96e79218965eb72c92a549dd5a330112', 'male', 'customer', '208/18/55/42 đường 138, phường Tân Phú, quận 9, HCM'),
+('AFFE02B6-E596-CD3D-E142-9E741E22477B', 1, 'Trần Phàm', '0987654123', 'tran@gmail.com', 'e10adc3949ba59abbe56e057f20f883e', 'male', 'manager', ''),
+('b4b97558-8bf3-425d-a26f-bf6dd5a2bb13', 1, 'Nguyen Van A', '0123456987', '', '25f9e794323b453885f5181f1b624d0b', 'male', 'customer', ''),
+('c1323099-cc4d-451f-95be-46a68c9d1bfb', 1, 'Nguyen Van A', '0123456985', '', 'e10adc3949ba59abbe56e057f20f883e', 'male', 'customer', ''),
+('c9459c88-d80e-421b-bc09-51cadc7a1392', 1, 'Nguyen Van B', '0123456988', NULL, 'e10adc3949ba59abbe56e057f20f883e', 'male', 'customer', 'fjdhsfjslakfjldsa'),
+('cae1da1c-1ba0-4670-875f-84fd67eed92b', 1, 'Nguyen Van A', '01234569876', '', 'e10adc3949ba59abbe56e057f20f883e', 'male', 'customer', ''),
+('fbb9e56e-cd26-42aa-a07d-5b3cb3e88815', 1, 'Nguyen B', '0123456135', 'nguyenb@gmail.com', '5baf03061fefc117e70984026e543e04', 'male', 'manager', ''),
+('fdc751d1-fbcf-44c9-b961-7e25c057aaf1', 1, 'Tiến Dũng', '0385154559', NULL, 'e10adc3949ba59abbe56e057f20f883e', 'male', 'customer', '208/18/55/42 đường 138, phường Tân Phú, quận 9, HCM');
 
 -- --------------------------------------------------------
 
@@ -124,7 +148,7 @@ CREATE TABLE `feedback` (
   `ProductID` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `Content` varchar(5000) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `Start_date` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -135,9 +159,9 @@ CREATE TABLE `feedback` (
 CREATE TABLE `image` (
   `Id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `Content` varchar(500) NOT NULL,
-  `Main` tinyint(1) NOT NULL DEFAULT 0,
+  `Main` tinyint(1) NOT NULL DEFAULT '0',
   `ProductID` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `image`
@@ -225,11 +249,11 @@ INSERT INTO `image` (`Id`, `Content`, `Main`, `ProductID`) VALUES
 
 CREATE TABLE `news` (
   `Id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `Status` tinyint(1) NOT NULL DEFAULT 0,
+  `Status` tinyint(1) NOT NULL DEFAULT '0',
   `Start_date` datetime DEFAULT NULL,
   `End_date` datetime DEFAULT NULL,
   `Content` varchar(5000) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 -- --------------------------------------------------------
 
@@ -239,18 +263,18 @@ CREATE TABLE `news` (
 
 CREATE TABLE `product` (
   `Id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `Is_active` tinyint(1) NOT NULL DEFAULT 1,
+  `Is_active` tinyint(1) NOT NULL DEFAULT '1',
   `Name` varchar(100) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `Type` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `Price` decimal(20,5) NOT NULL,
-  `Quantity` decimal(10,0) NOT NULL DEFAULT 0,
+  `Quantity` decimal(10,0) NOT NULL DEFAULT '0',
   `Description` varchar(5000) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci DEFAULT NULL,
   `Material` varchar(1000) DEFAULT NULL,
   `Style` varchar(1000) DEFAULT NULL,
   `Album` varchar(1000) DEFAULT NULL,
   `Model` varchar(1000) DEFAULT NULL,
   `Connect` varchar(1000) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Dumping data for table `product`
@@ -261,7 +285,7 @@ INSERT INTO `product` (`Id`, `Is_active`, `Name`, `Type`, `Price`, `Quantity`, `
 ('4090ac8e-d1b1-4479-836e-09c63eb822d2', 1, 'ĐẦM SUÔNG ĐỎ TAY RỦ D02002', 'Đầm', '1399000.00000', '60', '', 'Vải tổng hợp cao cấp', 'Đầm thiết kế dáng suông dài qua gối, tay rủ, tone màu đỏ kết hợp họa tiết hoa thêu', 'NEM NEW', 'Mặc sản phẩm size 2', ''),
 ('420f1322-8d35-4290-b909-6b1f7abc739f', 1, 'SƠ MI CỔ NƠ SM18212', 'Áo sơ mi', '799000.00000', '160', '', 'Vải tổng hợp cao cấp', 'Áo sơ mi thiết kế tay lỡ, tone màu hồng nhat, cổ phối nơ thắt cách điệu', 'NEM NEW', 'Mặc sản phẩm size 2', 'Chân váy Z08302'),
 ('4459e863-fd78-4ded-b5a0-28fa9580ce37', 1, 'QUẦN CÔNG SỞ Q43242', 'Quần Dài', '429000.00000', '70', '', 'Vải tổng hợp cao cấp', 'Quần dài thiết kế cạp cao, ống đứng, tone màu đen trơn, xếp li phía trước', 'NEM NEW', 'mặc sản phẩm size 2', 'áo SM42552'),
-('4626c92a-5c3c-46b4-b25b-1eb558970c8a', 1, 'ÁO DÀI ĐÍNH HOA AD09182', 'Áo dài', '1899000.00000', '80', 'Phù hợp: lễ tết, cưới hỏi, đi sự kiện, tạo vẻ trẻ trung, duyên dáng cho người mặc.', 'Vải tổng hợp cao cấp', 'Áo dài thiết kế tay bồng, tone màu trắng, kết hợp họa tiết hoa thêu đính', 'NEM NEW', 'Mặc sản phẩm size 2', 'Quần Q09192'),
+('4626c92a-5c3c-46b4-b25b-1eb558970c8a', 1, 'ÁO DÀI ĐÍNH HOA AD09182', 'Áo Dài', '1899000.00000', '80', 'Phù hợp: lễ tết, cưới hỏi, đi sự kiện, tạo vẻ trẻ trung, duyên dáng cho người mặc.', 'Vải tổng hợp cao cấp', 'Áo dài thiết kế tay bồng, tone màu trắng, kết hợp họa tiết hoa thêu đính', 'NEM NEW', 'Mặc sản phẩm size 2', 'Quần Q09192'),
 ('4a125cf4-c3a8-4dc8-bde3-2a3473f98681', 1, 'SƠ MI OVERSIZE SM19562', 'Áo sơ mi', '999000.00000', '160', 'Lưu ý: sản phẩm không kèm đai', 'Vải tổng hợp cao cấp', 'Áo sơ mi thiết kế dáng rộng, cổ bẻ, tone màu xanh ', 'NEM NEW', 'mặc sản phẩm size 2', 'Quần Q67052'),
 ('5021a009-4f4c-479f-a97e-87425b1a85e2', 1, 'CHÂN VÁY REN XẾP LI Z19322', 'Chân váy', '899000.00000', '20', 'Mặc mát, thích hợp vào mùa hè', 'Vải ren cao cấp', '​chân váy midi xếp li dài qua gối,  tone màu xanh đậm', 'NEM NEW', 'mặc sản phẩm size 2', 'Áo SM19312'),
 ('608f0956-8d2b-4c27-bf85-8908f5b1cdf7', 1, 'ĐẦM LIỀN ĐÍNH HOA 3D D20362', 'Đầm', '1399000.00000', '40', '', 'Vải tổng hợp cao cấp', 'Đầm liền thiết kế dáng ôm dài qua gối, tay bồng, tone màu xanh trơn kết hợp hoa 3D đính nổi', 'NEM NEW', 'Mặc sản phẩm size 2', ''),
@@ -269,11 +293,11 @@ INSERT INTO `product` (`Id`, `Is_active`, `Name`, `Type`, `Price`, `Quantity`, `
 ('6796cad8-04b8-4258-8048-6d44b08d9b5e', 1, 'SƠ MI TRẮNG ĐÍNH HOA NỔI D19412', 'Áo sơ mi', '799000.00000', '80', '', 'Vải tổng hợp cao cấp', 'Áo thiết kế dài tay, cổ bẻ, tone màu trắng kết hợp hoa 3D đính nổi', 'NEM NEW', 'Mặc sản phẩm size 2', 'Chân váy Z20602'),
 ('80333cd7-ae8b-4fed-957d-62939c4d3d5f', 1, 'BỘ MẶC NHÀ HOA XANH HW03652', 'Set bộ', '599000.00000', '60', '', 'Vải tổng hợp cao cấp', 'Bộ mặc nhà bao gồm áo không tay và quần short, kết hợp họa tiết hoa xanh', 'NEM NEW', 'mặc sản phẩm size 2', ''),
 ('8dafd7d6-4bfa-4085-a0f7-e4c37e8ff3b7', 1, 'JUMPSUIT CHẤM BI DÁNG DÀI J04882', 'Jumpsuit', '1399000.00000', '60', '', 'Vải tổng hợp cao cấp', 'Jumpsuit thiết kế ống rộng, cổ bẻ, tone màu đen kết hợp họa tiết chấm bi', 'NEM NEW', 'mặc sản phẩm size 2', ''),
-('96934f7d-90c5-4c5e-a52e-633cf6123650', 1, 'ÁO DÀI THÊU HOA AD09942', 'Áo dài', '1759000.00000', '80', 'Phù hợp: lễ tết, cưới hỏi, đi sự kiện, tạo vẻ trẻ trung, duyên dáng cho người mặc.', 'Vải tổng hợp cao cấp', 'Áo dài thiết kế dài tay, tone màu vàng kết hợp họa tiết hoa thêu', 'NEM NEW', 'Mặc sản phẩm size 2', 'Quần Q10882'),
+('96934f7d-90c5-4c5e-a52e-633cf6123650', 1, 'ÁO DÀI THÊU HOA AD09942', 'Áo Dài', '1759000.00000', '80', 'Phù hợp: lễ tết, cưới hỏi, đi sự kiện, tạo vẻ trẻ trung, duyên dáng cho người mặc.', 'Vải tổng hợp cao cấp', 'Áo dài thiết kế dài tay, tone màu vàng kết hợp họa tiết hoa thêu', 'NEM NEW', 'Mặc sản phẩm size 2', 'Quần Q10882'),
 ('a579b747-778f-4baa-a93c-eeec5eefa9d0', 1, 'JUMPSUIT DÁNG NGẮN J01302', 'Jumpsuit', '799000.00000', '50', 'Phù hợp: đi làm, sự kiện, hay đi dạo phố, tạo vẻ trẻ trung nữ tính cho người mặc.', 'Vải tổng hợp cao cấp', 'Jumpsuit thiết kế dáng ngắn, không tay, cổ đáp chéo, tone màu đỏ kết hợp họa tiết hoa nhí', 'NEM NEW', 'mặc sản phẩm size 2', ''),
 ('b89e62d5-b4f1-4f14-bbca-d88efc58447a', 1, 'ĐẦM REN TAY RỦ D19502', 'Đầm', '1599000.00000', '20', 'Lưu ý: sản phẩm không kèm đai', 'vải ren cao cấp', 'đầm thiết kế dáng chữ A dài qua gối, cổ tròn,tay rủ, tone màu nâu be trơn', 'NEM NEW', 'mặc sản phẩm size 2', ''),
 ('ba09f81e-e926-49bb-8901-20df5e157626', 1, 'ÁO DÀI HỌA TIẾT AD15902', 'Áo Dài', '1499000.00000', '100', '', 'Vải tổng hợp cao cấp', 'Áo dài thiết kế dài tay, tone nền màu nâu kết hợp họa tiết in nổi bật', 'NEM NEW', 'mặc sản phẩm size 2', 'quần Q17292'),
-('c6d4928e-5dd2-4619-b597-f531325895fa', 1, 'ÁO DÀI HOA AD10872', 'Áo dài', '1499000.00000', '80', '', 'Vải tổng hợp cao cấp', 'Áo dài thiết kế tone màu xanh kết hợp họa tiết hoa in', 'NEM NEW', 'Mặc sản phẩm size 2', 'Quần Q09102'),
+('c6d4928e-5dd2-4619-b597-f531325895fa', 1, 'ÁO DÀI HOA AD10872', 'Áo Dài', '1499000.00000', '80', '', 'Vải tổng hợp cao cấp', 'Áo dài thiết kế tone màu xanh kết hợp họa tiết hoa in', 'NEM NEW', 'Mặc sản phẩm size 2', 'Quần Q09102'),
 ('d28c6612-0006-47f2-92b0-3b4856822323', 1, 'ĐẦM ĐEN TAY BỒNG D19162', 'Đầm', '1399000.00000', '20', 'Lưu ý: sản phẩm không kèm đai', 'Vải tổng hợp cao cấp', 'Đầm thiết kế dáng chữ A dài qua gối, tone màu đen trơn', 'NEM', 'mặc sản phẩm size 2', ''),
 ('d79d5531-bc03-4a83-ad5b-ad012aa1afa6', 1, 'JUMPSUIT CỔ VEST J09262', 'Jumpsuit', '999000.00000', '20', 'Phù hợp: đi làm, sự kiện, hay đi dạo phố, tạo vẻ trẻ trung nữ tính cho người mặc.', 'Vải tổng hợp cao cấp', 'Jumpsuit thiết kế dáng ngắn, tone màu xanh trơn, cổ bẻ 2 ve', 'NEM NEW', 'Mặc sản phẩm size 2', ''),
 ('e1a38dd1-90ec-45ad-bedb-0eb5ab030b9d', 1, 'SƠ MI REN SM00292', 'Áo sơ mi', '799000.00000', '160', 'Lưu ý: sản phẩm không kèm đai', 'vải ren cao cấp', 'Áo thiết kế vai bồng, cổ tròn, tone màu đen trơn ', 'NEM', 'Mặc sản phẩm size 2', 'Quần Q00302'),
@@ -290,11 +314,11 @@ INSERT INTO `product` (`Id`, `Is_active`, `Name`, `Type`, `Price`, `Quantity`, `
 
 CREATE TABLE `voucher` (
   `Id` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-  `Is_active` tinyint(1) NOT NULL DEFAULT 1,
-  `Percent` decimal(5,2) NOT NULL DEFAULT 0.00,
+  `Is_active` tinyint(1) NOT NULL DEFAULT '1',
+  `Percent` decimal(5,2) NOT NULL DEFAULT '0.00',
   `Start_date` datetime NOT NULL,
   `End_date` datetime NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_0900_ai_ci;
 
 --
 -- Indexes for dumped tables
@@ -376,7 +400,7 @@ ALTER TABLE `bill`
 -- Constraints for table `bill_detail`
 --
 ALTER TABLE `bill_detail`
-  ADD CONSTRAINT `FK_bill_detail_bill` FOREIGN KEY (`BillID`) REFERENCES `bill` (`Id`),
+  ADD CONSTRAINT `FK_bill_detail_bill` FOREIGN KEY (`BillID`) REFERENCES `bill` (`Id`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `FK_bill_detail_product` FOREIGN KEY (`ProductID`) REFERENCES `product` (`Id`);
 
 --
@@ -390,7 +414,7 @@ ALTER TABLE `cart`
 -- Constraints for table `feedback`
 --
 ALTER TABLE `feedback`
-  ADD CONSTRAINT `FK_feedback_customer` FOREIGN KEY (`CustomerID`) REFERENCES `customer` (`Id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
+  ADD CONSTRAINT `FK_feedback_customer` FOREIGN KEY (`CustomerID`) REFERENCES `customer` (`Id`),
   ADD CONSTRAINT `FK_feedback_product` FOREIGN KEY (`ProductID`) REFERENCES `product` (`Id`);
 
 --
