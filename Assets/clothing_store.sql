@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 28, 2023 at 07:10 AM
+-- Generation Time: Apr 28, 2023 at 08:05 AM
 -- Server version: 10.4.24-MariaDB
 -- PHP Version: 7.4.29
 
@@ -56,7 +56,7 @@ CREATE TABLE `bill_detail` (
   `ProductID` char(36) CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
   `Count` int(10) UNSIGNED NOT NULL DEFAULT 1,
   `Price_item` decimal(20,5) NOT NULL DEFAULT 0.00000,
-  `Size` int(2) NOT NULL,
+  `Size` varchar(10) NOT NULL,
   `Color` varchar(10) CHARACTER SET utf8mb4 COLLATE utf8mb4_vietnamese_ci NOT NULL,
   `Rate` int(1) NOT NULL DEFAULT 0
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
@@ -66,8 +66,8 @@ CREATE TABLE `bill_detail` (
 --
 
 INSERT INTO `bill_detail` (`Id`, `BillID`, `ProductID`, `Count`, `Price_item`, `Size`, `Color`, `Rate`) VALUES
-('51145805-b4b0-45e3-9526-c765a270090a', 'fd7be617-3767-465c-a737-f45248777ef2', '219971e4-a0c4-4699-bbed-5ce8ba211175', 1, '599000.00000', 2, 'pink', 2),
-('9b3fc02a-d529-4261-8207-618b92396d0a', 'fd7be617-3767-465c-a737-f45248777ef2', '420f1322-8d35-4290-b909-6b1f7abc739f', 2, '799000.00000', 3, 'yellow', 4);
+('51145805-b4b0-45e3-9526-c765a270090a', 'fd7be617-3767-465c-a737-f45248777ef2', '219971e4-a0c4-4699-bbed-5ce8ba211175', 1, '599000.00000', '2', 'pink', 2),
+('9b3fc02a-d529-4261-8207-618b92396d0a', 'fd7be617-3767-465c-a737-f45248777ef2', '420f1322-8d35-4290-b909-6b1f7abc739f', 2, '799000.00000', '3', 'yellow', 4);
 
 -- --------------------------------------------------------
 
