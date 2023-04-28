@@ -1,15 +1,15 @@
 <?php
 class Database extends PDO
 {
-    private $host = 'localhost';
-    private $user = 'root';
-    private $password = '';
-    private $database = 'clothing_store';
+    private $host = 'bnqnkt6zizg4yarlnt9r-mysql.services.clever-cloud.com';
+    private $user = 'uyvga3n9ho45vzhj';
+    private $password = 'sXepIYJUpIVyMROi02Yo';
+    private $database = 'bnqnkt6zizg4yarlnt9r';
 
     public function __construct()
     {
         try {
-            $dsn = "mysql:host=$this->host;dbname=$this->database;charset=UTF8";
+            $dsn = "mysql:host=$this->host;port=3306;dbname=$this->database;charset=UTF8";
             parent::__construct($dsn, $this->user, $this->password,
             array(PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8"));
 

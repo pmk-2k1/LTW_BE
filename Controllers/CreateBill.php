@@ -37,7 +37,7 @@ try {
     $total = 0;
     if (count($data->product) == 0) {
         $queryBillDetail = $db->query("INSERT INTO bill(Id, Status, Total, Time, Pay_method, Note, CustomerID)
-        VALUES ('" . $billID . "','" . false . "','" . $total . "','" . $datetime->format('Y-m-d H:i:s') . "','" . $data->method . "','" . $data->note . "','" . $data->customerID . "')");
+        VALUES ('" . $billID . "', 1,'" . $total . "','" . $datetime->format('Y-m-d H:i:s') . "','" . $data->method . "','" . $data->note . "','" . $data->customerID . "')");
     } else {
         $queryBillDetail = "INSERT INTO bill_detail(Id, BillID, ProductID, Count, Price_item, Size, Color, Rate) VALUES";
         $values = array();
@@ -50,7 +50,7 @@ try {
         $queryBillDetail .= implode(", ", $values);
 
         $stmt = $db->prepare($queryBillDetail);
-
+        
         $i = 1;
         foreach ($data->product as $item) {
             $queryPrice = $db->query("SELECT Price FROM product WHERE Id = '" . $item->id . "'");
@@ -65,8 +65,8 @@ try {
             $stmt->bindValue($i++, $item->rate);
         }
 
-        $queryBillDetail = $db->query("INSERT INTO bill(Id, Status, Total, Time, Pay_method, Note, CustomerID)
-        VALUES ('" . $billID . "','" . false . "','" . $total . "','" . $datetime->format('Y-m-d H:i:s') . "','" . $data->method . "','" . $data->note . "','" . $data->customerID . "')");
+        $query = $db->query("INSERT INTO bill(Id, Status, Total, Time, Pay_method, Note, CustomerID)
+        VALUES ('" . $billID . "', 1,'" . $total . "','" . $datetime->format('Y-m-d H:i:s') . "','" . $data->method . "','" . $data->note . "','" . $data->customerID . "')");
 
         $stmt->execute();
     }
