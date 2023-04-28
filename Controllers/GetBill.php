@@ -2,7 +2,7 @@
 require_once '..\config\database.php';
 
 header('Access-Control-Allow-Origin: *');
-header("Access-Control-Allow-Methods: GET");
+header("Access-Control-Allow-Methods: POST");
 header("Access-Control-Allow-Headers: Content-Disposition, Content-Type, Content-Length, Accept-Encoding");
 header("Content-type: application/json");
 
@@ -28,10 +28,16 @@ try {
 
     if ($bills == true) {
         for ($i = 0; $i < count($bills); $i++) {
-            $detail = $db->query("SELECT p.Name, p.Type, b.Count, b.Price_item, b.Size, b.Color, b.Rate
+            $detail = $db->query("SELECT p.Id, p.Album, p.Name, p.Type, b.Count, b.Price_item, b.Size, b.Color, b.Rate
                                 FROM bill_detail AS b, product AS p
                                 WHERE b.ProductID = p.Id AND b.BillID = '" . $bills[$i]['Id'] . "'");
             $bills[$i]['details'] = $detail->fetchAll(PDO::FETCH_ASSOC);
+            
+            for ($j=0; $j < count($bills[$i]['details']); $j++) { 
+                $image = $db->query("SELECT Content FROM image WHERE Main = 1 AND ProductID = '" . $bills[$i]['details'][$j]['Id'] . "'");
+                $bills[$i]['details'][$j]['Image'] = $image->fetchAll(PDO::FETCH_ASSOC)[0];
+            }
+            // echo json_encode($bills[$i]['details'][0]['Id']);
         }
         echo '{"isSuccess": true, "message": "Thành công", "data": ' . json_encode($bills) . '}';
     } else {
