@@ -1,52 +1,62 @@
 <?php
-class Bill{
-    private $bill_id;
-    private $bill_status;
-    private $note;
-    private $date;
-    private $pay_method;
+class Bill
+{
+    private $id;
+    private $status;
     private $total;
-    private $bill_detail_id;
+    private $time;
+    private $pay_method;
+    private $note;
+    private $customerID;
 
-    public function __construct($bill_id, $bill_status,$note, $date, $pay_method, $total, $bill_detail_id){
-        $this->bill_id = $bill_id;
-        $this->bill_status = $bill_status;
-        $this->note = $note;
-        $this->date = $date;
-        $this->pay_method = $pay_method;
+    public function __construct($id, $status, $total, $time, $pay_method, $note, $customerID)
+    {
+        $this->id = $id;
+        $this->status = $status;
         $this->total = $total;
-        $this->bill_detail_id = $bill_detail_id;
+        $this->time = $time;
+        $this->pay_method = $pay_method;
+        $this->note = $note;
+        $this->customerID = $customerID;
     }
-    public function getBillID(){
-        return $this->bill_id;
+    public function getBillID()
+    {
+        return $this->id;
     }
-    public function getBillSatus(){
-        return $this->bill_status;
+    public function getBillSatus()
+    {
+        return $this->status;
     }
-    public function getNote(){
+    public function getNote()
+    {
         return $this->note;
     }
-    public function getDate(){
-        return $this->date;
+    public function getDate()
+    {
+        return $this->time;
     }
-    public function getPayMethod(){
+    public function getPayMethod()
+    {
         return $this->pay_method;
     }
-    public function getTotal(){
+    public function getTotal()
+    {
         return $this->total;
     }
-    public function getBillDetailID(){
-        return $this->bill_detail_id;
+    public function getBillDetailID()
+    {
+        return $this->customerID;
     }
-    public function returnBillArray(){
+    public function returnBillArray()
+    {
         $bill = array();
-        $bill['bill_id'] = $this->bill_id;
-        $bill['bill_status'] = $this->bill_status;
-        $bill['note'] = $this->note;
-        $bill['date'] = $this->date;
-        $bill['pay_method'] = $this->pay_method;
+        $bill['id'] = $this->id;
+        $bill['status'] = $this->status;
         $bill['total'] = $this->total;
-        $bill['bill_detail_id'] = $this->bill_detail_id;
+        $bill['time'] = $this->time;
+        $bill['pay_method'] = $this->pay_method;
+        $bill['note'] = $this->note;
+        $bill['customerID'] = $this->customerID;
         return $bill;
     }
 }

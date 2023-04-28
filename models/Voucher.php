@@ -1,42 +1,42 @@
 <?php
 class Voucher{
-    private $voucher_id;
-    private $voucher_endow;
-    private $voucher_active;
-    private $voucher_start_date;
-    private $voucher_end_date;
+    private $voucherId;
+    private $voucherIsActive;
+    private $voucherPercent;
+    private $voucherStartDate;
+    private $voucherEndDate;
 
-    public function __construct($voucher_id, $voucher_endow, $voucher_active, $voucher_start_date, $voucher_end_date){
-        $this->voucher_id = $voucher_id;
-        $this->voucher_endow = $voucher_endow;
-        $this->voucher_active = $voucher_active;
-        $this->voucher_start_date = $voucher_start_date;
-        $this->voucher_end_date = $voucher_end_date;
+    public function __construct($voucherIsActive, $voucherPercent, $voucherStartDate, $voucherEndDate){
+        // $this->voucherId = $voucherId;
+        $this->voucherIsActive = $voucherIsActive;
+        $this->voucherPercent = $voucherPercent;
+        $this->voucherStartDate = $voucherStartDate;
+        $this->voucherEndDate = $voucherEndDate;
     }
 
     public function getVoucherID(){
-        return $this->voucher_id;
+        return $this->voucherId;
     }
-    public function getVoucherEndow(){
-        return $this->voucher_endow;
+    public function getVoucherIsActive(){
+        return $this->voucherIsActive;
     }
-    public function getVoucherActive(){
-        return $this->voucher_active;
+    public function getVoucherPercent(){
+        return $this->voucherPercent;
     }
     public function getVoucherStartDate(){
-        return $this->voucher_start_date;
+        return $this->voucherStartDate;
     }
     public function getVoucherEndDate(){
-        return $this->voucher_end_date;
+        return $this->voucherEndDate;
     }
 
     public function returnVoucherArray(){
         $voucher = array();
-        $voucher['voucher_id'] = $this->voucher_id;
-        $voucher['voucher_endow'] = $this->voucher_endow;
-        $voucher['voucher_active'] = $this->voucher_active;
-        $voucher['voucher_start_date'] = $this->voucher_start_date;
-        $voucher['voucher_end_date'] = $this->voucher_end_date;
+        $voucher['voucherId'] = $this->voucherId;
+        $voucher['voucherIsActive'] = $this->voucherIsActive;
+        $voucher['voucherPercent'] = $this->voucherPercent;
+        $voucher['voucherStartDate'] = $this->voucherStartDate;
+        $voucher['voucherEndDate'] = $this->voucherEndDate;
         return $voucher;
     }
 }
