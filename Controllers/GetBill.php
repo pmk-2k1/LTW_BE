@@ -35,7 +35,7 @@ try {
             
             for ($j=0; $j < count($bills[$i]['details']); $j++) { 
                 $image = $db->query("SELECT Content FROM image WHERE Main = 1 AND ProductID = '" . $bills[$i]['details'][$j]['Id'] . "'");
-                $bills[$i]['details'][$j]['Image'] = $image->fetchAll(PDO::FETCH_ASSOC)[0];
+                $bills[$i]['details'][$j]['Image'] = $image->fetchAll(PDO::FETCH_ASSOC)[0]['Content'];
             }
             // echo json_encode($bills[$i]['details'][0]['Id']);
         }
