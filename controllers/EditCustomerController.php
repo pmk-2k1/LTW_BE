@@ -20,7 +20,7 @@ try {
     $select_id = $db->query("SELECT * FROM customer WHERE Id = '$data->id'");
     $data_id = $select_id->fetch(PDO::FETCH_ASSOC);
     if($data_id == false) {
-        echo '{"isSuccess": "false", "message": "Can not find user with id: "' .$data->id. '}';
+        echo '{"isSuccess": false, "message": "Can not find user with id: "' .$data->id. '}';
         exit;
     }
     
@@ -29,8 +29,8 @@ try {
         WHERE Id = '$data->id'";
 
     $db->query($sql);
-    echo '{"isSuccess": "true", "message": "Chỉnh sửa thành công"}';
+    echo '{"isSuccess": true, "message": "Chỉnh sửa thành công"}';
 } catch (Exception $e) {
-    echo '{"isSuccess": "false", "message": "Error SQL: ' .$e->getMessage(). '"}';
+    echo '{"isSuccess": false, "message": "Error SQL: ' .$e->getMessage(). '"}';
 }
 ?>
